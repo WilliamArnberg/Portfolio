@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cool on </title>
+    <link>http://localhost:1313/tags/cool/</link>
+    <description>Recent content in Cool on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>arnberg19@gmail.com (William Arnberg)</managingEditor>
+    <webMaster>arnberg19@gmail.com (William Arnberg)</webMaster>
+    
+    <lastBuildDate>Thu, 31 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/cool/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Very Cool Feature</title>
+      <link>http://localhost:1313/projects/specialization/</link>
+      <pubDate>Thu, 31 Oct 2024 00:00:00 +0000</pubDate>
+      <author>arnberg19@gmail.com (William Arnberg)</author>
+      <guid>http://localhost:1313/projects/specialization/</guid>
+      <description>I did this.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/projects/specialization/feature_lol.png" />
+    </item>
+    
+  </channel>
+</rss>

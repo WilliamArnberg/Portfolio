@@ -1,0 +1,27 @@
+disabled = false
+languageCode = "en"
+languageName = "English"
+weight = 1
+#title = "William Arnberg"
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+  rtl = false
+  dateFormat = "2 January 2006"
+  #logo = "profile.png"
+  # secondaryLogo = "img/secondary-logo.png"
+  # description = "My awesome website"
+  # copyright = "Copy, _right?_ :thinking_face:"
+
+ [params.author]
+   name = "William Arnberg"
+   email = "arnberg19@gmail.com"
+   image = "profile.jpg"
+   imageQuality = 96
+   headline = "Game Developer"
+   bio = "Game developer, engine programmer .."
+   links = [
+     { email = "mailto:arnberg19@gmail.com" },
+     { itch-io = "https://wilburgamedev.itch.io/" },
+   ]

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Entity-Component-System on </title>
+    <link>http://localhost:1313/tags/entity-component-system/</link>
+    <description>Recent content in Entity-Component-System on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>arnberg19@gmail.com (William Arnberg)</managingEditor>
+    <webMaster>arnberg19@gmail.com (William Arnberg)</webMaster>
+    
+    <lastBuildDate>Wed, 30 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/entity-component-system/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Entity-Compent-System</title>
+      <link>http://localhost:1313/projects/ecs/</link>
+      <pubDate>Wed, 30 Oct 2024 00:00:00 +0000</pubDate>
+      <author>arnberg19@gmail.com (William Arnberg)</author>
+      <guid>http://localhost:1313/projects/ecs/</guid>
+      <description>Entity-Component-System I build for our 6th gameproject at The Game Assembly.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/projects/ecs/feature_frog.png" />
+    </item>
+    
+  </channel>
+</rss>
