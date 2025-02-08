@@ -1,0 +1,129 @@
+---
+date: '2024-08-26T09:53:42+02:00' # date in which the content is created - defaults to "today"
+title: 'Entity-Component-System'
+draft: false # set to "true" if you want to hide the content 
+summary: "During our second year, I designed and implemented my own Archetype-based ECS in my own game engine."
+    
+
+## The content is used for the description of the project
+## For the content, you can use a title and a job description.
+## For example:
+### Fixing the world, one byte at a time
+# The beginning of a great career. 
+# 
+---
+
+At the beginning of our second year at ***The Game Assembly*** we get the opportunity to build our own game engines, and in the previous year I got a lot of experience working in a more pure object-oriented way using GameObject component systems riddled with virtual functions causing cache misses at every function call. 
+
+Having dug through the trenches and seen what problems could arise making games with a object oriented and inheritance based model I felt a major lacking of knowledge towards a the data oriented way of programming I had seen a lot of GDC / CPPCon talks about.  
+The 2014 CPPcon Mike Acton talk was a huge inspiration.
+
+## Core Concepts
+A lot of the code have been stripped for display purposes, if you want the full project with more examples please visit my  [Git](https://github.com/WilliamArnberg/World).
+
+##### Entity
+```cpp
+    using entity = uint64_t;
+```
+An entity is a unique identifier that represents a game object. It does not contain any data or logic itself but serves as a reference for components.
+
+##### Components
+Components are user created [POD](https://learn.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=msvc-170#pod-types) or Non-POD data structures that store information about an entity. 
+
+#### Component Storage
+
+Each Component type is stored in a column which consists of a contiguous data buffer, and type-erasure information.
+
+```cpp
+class Column 
+{
+    std::unique_ptr<std::byte[]> myBuffer; //Component storage
+	ComponentTypeInfo myTypeInfo; //Type Info
+	size_t myCapacity{0}; //Amount of bytes this column can hold before needing to grow
+	size_t myCurrentMemoryUsed{0}; 
+}
+```
+The Type erasure data each column hold is filled up automatically when the user calls `AddComponent<T>();` 
+Storing type-erased constructors enables us to use modern C++ functionalities.
+```cpp
+struct ComponentTypeInfo
+{
+    ComponentID typeID;
+	size_t size{0};											// Size of the component type in bytes
+	size_t alignment {0};										// Alignment requirement of the type
+	void (*construct)(void* aDest) = nullptr;					// Function pointer for default construction
+	void (*copy)(void* aDest, const void* aSrc) = nullptr;		// copy constructor
+	void (*move)(void* aDest, void* aSrc) = nullptr;				// Move constructor
+	void (*destruct)(void* aObj) = nullptr;						// Destructor
+	bool isTrivial = false;
+}
+```
+
+The columns are stored in an Archetype.
+
+```cpp
+struct Archetype 
+{
+    ArchetypeID myID{ 0 };
+    Type myType{};	//The order of components in the component list
+    std::unordered_set<ComponentID> myTypeSet{}; //Used for fast lookup into the archetype if it contains a specific type
+    std::vector<Column> myComponents{}; //Columns holding the data, use the entity row to access the specific component
+    std::vector<entity> myEntities{}; //serves as our entity list but the order of entities are also the rows in the component columns
+    std::unordered_map<ComponentID, ArchetypeEdge> myEdges{}; //Add and remove Edges.
+    size_t myMaxCount{0};
+}
+```
+
+
+Putting the design together gives us a clever way of organizing data, empowering us to have fast lookups and fast iterations over contiguous blocks of memory with 0 data fragmentation.  
+![image](images/ecs/ECS_Layouts.png)
+
+
+
+#### Systems
+
+
+
+Systems can be added with a simple call of `world.system([](){ //Do Stuff },Pipeline::OnUpdate);`   
+The ability to pipeline our games in specific segments empowers every decision about the data we are operationg on as we can for a fact know in what state each data is at every point of execution in our codebase.
+
+
+
+
+
+### Design Choices
+    
+I began researching the different kind of datalayout variations exisiting Entity-Component-Systems and there is essentially two camps.
+##### Sparse Sets
+ Components are stored in sparse-sets where the entity id's map to the component.  
+![](images/ecs/sparse.png)  
+    
+Adding and removing components are O(1), is less complicated and faster than the archetype way.
+    
+##### Archetypes 
+Components are stored in packed tables of contiguous memory blocks where entities and component ids act as row and column identifiers.
+    
+The archetypal pattern seemed intriguing and was at the time easier for me to understand and comprehend, I felt it was easier to reason about.
+    
+When desiging the ECS I was deadset on keeping the user interface as simple as possible my mantra was "Every programmer on my team need to love using this tool".  
+The core design pillars I employed were:
+- simplicity 
+- safety
+- speed
+
+Early on in the development developers on my team had a strong wish to be able to store Non-POD datatypes such as strings, vectors and functors.
+<!-- ![](/images/works/ecs.webp) -->
+#### Complete Feature list.
+* Cache-Friendly archetype and SoA (Struct of Arrays) storage.  
+* Handles POD & non POD datatypes, either by letting the compiler auto generate constructors for you or write your own.  
+* Write free floating queries or add functions to systems that automate and structure the pipelining. 
+
+* Easy to type deterministic Queries that return an range-for iterator returning a view class to each entity in that query spanning across multiple archetypes.  
+
+* Filtered Queries for when you need all entities containing N types as long as they don't contain M types.
+Returns an range-for iterator returning a view class to each entity in that query spanning across multiple archetypes.  
+
+* Cached Queries, that only gets reset if the underlying memory of the archetype changes. 
+
+###### References
+<https://research.swtch.com/sparse>

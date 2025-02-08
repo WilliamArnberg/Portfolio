@@ -1,0 +1,5 @@
+/* You can customize theme styles here */
+.custom-image {
+    width: 500px;
+    height: auto; /* Maintains aspect ratio */
+  }

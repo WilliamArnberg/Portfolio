@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Articles on </title>
+    <link>http://localhost:1313/articles/</link>
+    <description>Recent content in Articles on </description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 26 Aug 2024 09:53:42 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/articles/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Entity-Component-System</title>
+      <link>http://localhost:1313/articles/ecs_article/</link>
+      <pubDate>Mon, 26 Aug 2024 09:53:42 +0200</pubDate>
+      <guid>http://localhost:1313/articles/ecs_article/</guid>
+      <description>During our second year, I designed and implemented my own Archetype-based ECS in my own game engine.</description>
+    </item>
+    <item>
+      <title>Game Project 7</title>
+      <link>http://localhost:1313/articles/sp_7/</link>
+      <pubDate>Mon, 24 Jun 2024 14:38:33 +0200</pubDate>
+      <guid>http://localhost:1313/articles/sp_7/</guid>
+      <description>&lt;p&gt;Sample blog content. Like a lorem ipsum but saying something more interesting.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Example image&#34; src=&#34;http://localhost:1313/img/blog/feature-sample-3.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Welcome to the world of &amp;ldquo;Content Ipsum,&amp;rdquo; the fresh alternative to the classic lorem ipsum. It&amp;rsquo;s the perfect blend for designers and writers who crave a dash of creativity and meaning in their placeholder text. Imagine a text that not only fills the space but also sparks the imagination, a text that weaves tales of innovation, inspiration, and the endless possibilities that creativity brings.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Game Project 8</title>
+      <link>http://localhost:1313/articles/sp_8/</link>
+      <pubDate>Mon, 24 Jun 2024 14:38:33 +0200</pubDate>
+      <guid>http://localhost:1313/articles/sp_8/</guid>
+      <description>&lt;p&gt;Sample blog content. Like a lorem ipsum but saying something more interesting.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Example image&#34; src=&#34;http://localhost:1313/img/blog/kanba.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Welcome to the world of &amp;ldquo;Content Ipsum,&amp;rdquo; the fresh alternative to the classic lorem ipsum. It&amp;rsquo;s the perfect blend for designers and writers who crave a dash of creativity and meaning in their placeholder text. Imagine a text that not only fills the space but also sparks the imagination, a text that weaves tales of innovation, inspiration, and the endless possibilities that creativity brings.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Cooking Grandma</title>
+      <link>http://localhost:1313/articles/cooking_grandma/</link>
+      <pubDate>Fri, 21 Jun 2024 14:38:33 +0200</pubDate>
+      <guid>http://localhost:1313/articles/cooking_grandma/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
