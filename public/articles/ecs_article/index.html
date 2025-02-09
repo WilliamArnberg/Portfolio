@@ -133,13 +133,30 @@
           <div class="col-12"><p>At the beginning of our second year at <em><strong>The Game Assembly</strong></em> we get the opportunity to build our own game engines, and in the previous year I got a lot of experience working in a more pure object-oriented way using GameObject component systems riddled with virtual functions causing cache misses at every function call.</p>
 <p>Having dug through the trenches and seen what problems could arise making games with a object oriented and inheritance based model I felt a major lacking of knowledge towards a the data oriented way of programming I had seen a lot of GDC / CPPCon talks about.<br>
 The 2014 CPPcon Mike Acton talk was a huge inspiration.</p>
+<h2 id="design-choices">Design Choices</h2>
+<p>Early on I had a list of</p>
+<h5 id="sparse-sets">Sparse Sets</h5>
+<p>Components are stored in sparse-sets where the entity id&rsquo;s map to the component.<br>
+<img src="/images/ecs/sparse.png"></p>
+<p>Adding and removing components are O(1), is less complicated and faster than the archetype way.</p>
+<h5 id="archetypes">Archetypes</h5>
+<p>Components are stored in packed tables of contiguous memory blocks where entities and component ids act as row and column identifiers.</p>
+<p>The archetypal pattern seemed intriguing and was at the time easier for me to understand and comprehend, I felt it was easier to reason about.</p>
+<p>When desiging the ECS I was deadset on keeping the user interface as simple as possible my mantra was &ldquo;Every programmer on my team need to love using this tool&rdquo;.<br>
+The core design pillars I employed were:</p>
+<ul>
+<li>simplicity</li>
+<li>safety</li>
+<li>speed</li>
+</ul>
+<p>Early on in the development developers on my team had a strong wish to be able to store Non-POD datatypes such as strings, vectors and functors.</p>
 <h2 id="core-concepts">Core Concepts</h2>
 <p>A lot of the code have been stripped for display purposes, if you want the full project with more examples please visit my  <a href="https://github.com/WilliamArnberg/World">Git</a>.</p>
 <h5 id="entity">Entity</h5>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">using</span> entity <span style="color:#f92672">=</span> <span style="color:#66d9ef">uint64_t</span>;
 </span></span></code></pre></div><p>An entity is a unique identifier that represents a game object. It does not contain any data or logic itself but serves as a reference for components.</p>
 <h5 id="components">Components</h5>
-<p>Components are user created <a href="https://learn.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=msvc-170#pod-types">POD</a> or Non-POD data structures that store information about an entity.</p>
+<p>Components are user created <a href="https://learn.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=msvc-170#pod-types">POD</a> or Non-POD data structures that store data about an entity.</p>
 <h4 id="component-storage">Component Storage</h4>
 <p>Each Component type is stored in a column which consists of a contiguous data buffer, and type-erasure information.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Column</span> 
@@ -175,26 +192,32 @@ Storing type-erased constructors enables the use of modern C++ functionalities.<
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Putting the design together gives us a clever way of organizing data, empowering us to have fast lookups and fast iterations over contiguous blocks of memory with 0 data fragmentation.<br>
 <img alt="image" src="/images/ecs/ECS_Layouts.png"></p>
+<h4 id="queries">Queries</h4>
+<p>Queries is a way to quickly find every entity that match a list of component and/or tags.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>QueryIterator q <span style="color:#f92672">=</span> world.query<span style="color:#f92672">&lt;</span>Position,Rotation,Scale<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(Entity entity : q)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Position pos <span style="color:#f92672">=</span> entity.GetComponent<span style="color:#f92672">&lt;</span>Position<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Do Stuff
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>The iterator stores lists of a entity ids that then lets us compose a helper class for that entity which lets us access the components of said Entity.</p>
+<p>Since tags are empty structs its easy to add them to the query system.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Entity e <span style="color:#f92672">=</span> world.TQuery<span style="color:#f92672">&lt;</span>PlayerTag<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>Position pos <span style="color:#f92672">=</span> entity.GetComponent<span style="color:#f92672">&lt;</span>Position<span style="color:#f92672">&gt;</span>();
+</span></span></code></pre></div><p>Filterered queries are queries that gives us every single entity of type A,B,C.. as long as it does not contain types X,Y,Z&hellip;
+This is a powerful feature that makes it easy to reason about groups of entities that we may iterate over.
+For instance say that you want to stream a level, you want to destroy all entities of X,Y,Z but that query may be littered with entities that you do not intend to destroy. Tagging the entities not intended to be destroyed with <code>&lt;DontDestroyOnLoad&gt;</code> enables to filter out those entities from that query.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>QueryIterator q <span style="color:#f92672">=</span> world.FilteredQuery<span style="color:#f92672">&lt;</span>Position,Rotation,Scale,Renderable<span style="color:#f92672">&gt;</span>(std<span style="color:#f92672">::</span>tuple<span style="color:#f92672">&lt;</span>DontDestroyOnLoad<span style="color:#f92672">&gt;</span>());
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(Entity entity : q)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Do Stuff
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>Because every archetype is guaranteed to store every entity of that set of components, caching queries becomes as easy as storing an archetype associated with a specific query.</p>
 <h4 id="systems">Systems</h4>
-<p>Systems can be added with a simple call of <code>world.system([](){ //Do Stuff },Pipeline::OnUpdate);</code><br>
-The ability to pipeline our games in specific segments empowers every decision about the data we are operationg on as we can for a fact know in what state each data is at every point of execution in our codebase.</p>
-<h3 id="design-choices">Design Choices</h3>
-<p>I began researching the different kind of datalayout variations exisiting Entity-Component-Systems and there is essentially two camps.</p>
-<h5 id="sparse-sets">Sparse Sets</h5>
-<p>Components are stored in sparse-sets where the entity id&rsquo;s map to the component.<br>
-<img src="/images/ecs/sparse.png"></p>
-<p>Adding and removing components are O(1), is less complicated and faster than the archetype way.</p>
-<h5 id="archetypes">Archetypes</h5>
-<p>Components are stored in packed tables of contiguous memory blocks where entities and component ids act as row and column identifiers.</p>
-<p>The archetypal pattern seemed intriguing and was at the time easier for me to understand and comprehend, I felt it was easier to reason about.</p>
-<p>When desiging the ECS I was deadset on keeping the user interface as simple as possible my mantra was &ldquo;Every programmer on my team need to love using this tool&rdquo;.<br>
-The core design pillars I employed were:</p>
-<ul>
-<li>simplicity</li>
-<li>safety</li>
-<li>speed</li>
-</ul>
-<p>Early on in the development developers on my team had a strong wish to be able to store Non-POD datatypes such as strings, vectors and functors.</p>
+<p>Systems are functions with queries.
+Systems can be added with a simple call of <code>world.system([](){ //Do Stuff },Pipeline::OnUpdate);</code></p>
+<p>Pipelining the systems empowers every decision about the data we are operating on as we can for a fact know in what state each data is at every point of execution in our codebase.</p>
+<h2 id="improvements">Improvements</h2>
 <!-- raw HTML omitted -->
 <h4 id="complete-feature-list">Complete Feature list.</h4>
 <ul>

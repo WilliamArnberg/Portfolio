@@ -17,6 +17,27 @@ At the beginning of our second year at ***The Game Assembly*** we get the opport
 
 Having dug through the trenches and seen what problems could arise making games with a object oriented and inheritance based model I felt a major lacking of knowledge towards a the data oriented way of programming I had seen a lot of GDC / CPPCon talks about.  
 The 2014 CPPcon Mike Acton talk was a huge inspiration.
+## Design Choices
+Early on I had a list of 
+
+##### Sparse Sets
+ Components are stored in sparse-sets where the entity id's map to the component.  
+![](images/ecs/sparse.png)  
+    
+Adding and removing components are O(1), is less complicated and faster than the archetype way.
+    
+##### Archetypes 
+Components are stored in packed tables of contiguous memory blocks where entities and component ids act as row and column identifiers.
+    
+The archetypal pattern seemed intriguing and was at the time easier for me to understand and comprehend, I felt it was easier to reason about.
+    
+When desiging the ECS I was deadset on keeping the user interface as simple as possible my mantra was "Every programmer on my team need to love using this tool".  
+The core design pillars I employed were:
+- simplicity 
+- safety
+- speed
+
+Early on in the development developers on my team had a strong wish to be able to store Non-POD datatypes such as strings, vectors and functors.
 
 ## Core Concepts
 A lot of the code have been stripped for display purposes, if you want the full project with more examples please visit my  [Git](https://github.com/WilliamArnberg/World).
@@ -28,7 +49,7 @@ A lot of the code have been stripped for display purposes, if you want the full 
 An entity is a unique identifier that represents a game object. It does not contain any data or logic itself but serves as a reference for components.
 
 ##### Components
-Components are user created [POD](https://learn.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=msvc-170#pod-types) or Non-POD data structures that store information about an entity. 
+Components are user created [POD](https://learn.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=msvc-170#pod-types) or Non-POD data structures that store data about an entity. 
 
 #### Component Storage
 
@@ -78,40 +99,59 @@ struct Archetype
 Putting the design together gives us a clever way of organizing data, empowering us to have fast lookups and fast iterations over contiguous blocks of memory with 0 data fragmentation.  
 ![image](images/ecs/ECS_Layouts.png)
 
+#### Queries
+
+Queries is a way to quickly find every entity that match a list of component and/or tags.
+
+```cpp  
+QueryIterator q = world.query<Position,Rotation,Scale>();
+for(Entity entity : q)
+{
+    Position pos = entity.GetComponent<Position>();
+    //Do Stuff
+}
+
+```
+The iterator stores lists of a entity ids that then lets us compose a helper class for that entity which lets us access the components of said Entity. 
+
+Since tags are empty structs its easy to add them to the query system.
+```cpp  
+Entity e = world.TQuery<PlayerTag>();
+Position pos = entity.GetComponent<Position>();
+
+```
+Filterered queries are queries that gives us every single entity of type A,B,C.. as long as it does not contain types X,Y,Z...
+This is a powerful feature that makes it easy to reason about groups of entities that we may iterate over.
+For instance say that you want to stream a level, you want to destroy all entities of X,Y,Z but that query may be littered with entities that you do not intend to destroy. Tagging the entities not intended to be destroyed with `<DontDestroyOnLoad>` enables to filter out those entities from that query.
+
+```cpp  
+QueryIterator q = world.FilteredQuery<Position,Rotation,Scale,Renderable>(std::tuple<DontDestroyOnLoad>());
+for(Entity entity : q)
+{
+    //Do Stuff
+}
+
+```
+
+
+Because every archetype is guaranteed to store every entity of that set of components, caching queries becomes as easy as storing an archetype associated with a specific query.
+
+
+
 
 
 #### Systems
 
+Systems are functions with queries.
+Systems can be added with a simple call of `world.system([](){ //Do Stuff },Pipeline::OnUpdate);`
+
+Pipelining the systems empowers every decision about the data we are operating on as we can for a fact know in what state each data is at every point of execution in our codebase.
 
 
-Systems can be added with a simple call of `world.system([](){ //Do Stuff },Pipeline::OnUpdate);`   
-The ability to pipeline our games in specific segments empowers every decision about the data we are operationg on as we can for a fact know in what state each data is at every point of execution in our codebase.
+## Improvements
+  
 
 
-
-
-
-### Design Choices
-    
-I began researching the different kind of datalayout variations exisiting Entity-Component-Systems and there is essentially two camps.
-##### Sparse Sets
- Components are stored in sparse-sets where the entity id's map to the component.  
-![](images/ecs/sparse.png)  
-    
-Adding and removing components are O(1), is less complicated and faster than the archetype way.
-    
-##### Archetypes 
-Components are stored in packed tables of contiguous memory blocks where entities and component ids act as row and column identifiers.
-    
-The archetypal pattern seemed intriguing and was at the time easier for me to understand and comprehend, I felt it was easier to reason about.
-    
-When desiging the ECS I was deadset on keeping the user interface as simple as possible my mantra was "Every programmer on my team need to love using this tool".  
-The core design pillars I employed were:
-- simplicity 
-- safety
-- speed
-
-Early on in the development developers on my team had a strong wish to be able to store Non-POD datatypes such as strings, vectors and functors.
 <!-- ![](/images/works/ecs.webp) -->
 #### Complete Feature list.
 * Cache-Friendly archetype and SoA (Struct of Arrays) storage.  

@@ -14,6 +14,9 @@
     <loc>http://localhost:1313/articles/</loc>
     <lastmod>2024-08-26T09:53:42+02:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/projects/ecs/</loc>
+    <lastmod>2024-08-26T09:53:42+02:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/articles/ecs_article/</loc>
     <lastmod>2024-08-26T09:53:42+02:00</lastmod>
   </url><url>
@@ -22,12 +25,6 @@
   </url><url>
     <loc>http://localhost:1313/projects/</loc>
     <lastmod>2024-08-26T09:53:42+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/robo-advisor/</loc>
-    <lastmod>2024-08-25T09:53:42+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/swiss-fintech/</loc>
-    <lastmod>2024-08-25T09:53:42+02:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/articles/sp_7/</loc>
     <lastmod>2024-06-24T14:38:33+02:00</lastmod>

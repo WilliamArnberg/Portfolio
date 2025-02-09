@@ -221,7 +221,6 @@
       "bd-theme-text",
       "blog-single",
       "breadcrumb-bar",
-      "code",
       "complete-feature-list",
       "component-storage",
       "components",
@@ -232,24 +231,21 @@
       "email",
       "entity",
       "experience",
-      "features",
       "fixing-the-world-one-byte-at-a-time",
       "footer-color-selector",
       "full_name",
-      "give-me-some-code",
       "header",
-      "mantra",
+      "improvements",
       "message",
       "meta",
       "navbarSupportedContent",
       "portfolio",
       "projects-single",
+      "queries",
       "references",
-      "show-me-the-code",
       "showcase",
       "sparse-sets",
-      "systems",
-      "vocabulary"
+      "systems"
     ]
   }
 }
