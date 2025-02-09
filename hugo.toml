@@ -9,7 +9,7 @@ theme = "adritian-free-hugo-theme"
   images = ['/img/og-img.png']
   sections = ["showcase","client-and-work", "experience","about", "education", "contact"]
 
-  homepageExperienceCount = 3
+  homepageExperienceCount = 4
 
   [params.analytics]
   ## Analytics parameters.
@@ -58,7 +58,7 @@ theme = "adritian-free-hugo-theme"
         name = 'Portfolio'
         URL = '#portfolio'
         weight = 3
-        
+
         [[languages.en.menus.header]]
         name = "Experience"
         URL = "#experience"
