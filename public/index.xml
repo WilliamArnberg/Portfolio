@@ -9,11 +9,18 @@
     <lastBuildDate>Sun, 01 Dec 2024 00:00:00 +0100</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Job #3</title>
+      <title>Electrical Designer</title>
+      <link>http://localhost:1313/experience/job-4/</link>
+      <pubDate>Sun, 01 Dec 2024 00:00:00 +0100</pubDate>
+      <guid>http://localhost:1313/experience/job-4/</guid>
+      <description>&lt;h3 id=&#34;job-description--responsibilities&#34;&gt;Job Description / Responsibilities&lt;/h3&gt;&#xA;&lt;p&gt;Designed drawings and technical solutions for offices, apartment buildings, schools, and laboratories within electrical installations, telecom and data systems, and lighting.&lt;/p&gt;&#xA;&lt;p&gt;Created 3D models for the construction of prefabricated slab elements.&#xA;Analyzed project requirements and specifications and developed a technical/economic plan based on these requirements.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Project Manager</title>
       <link>http://localhost:1313/experience/job-3/</link>
       <pubDate>Sun, 01 Dec 2024 00:00:00 +0100</pubDate>
       <guid>http://localhost:1313/experience/job-3/</guid>
-      <description>&lt;h3 id=&#34;fixing-the-world-one-byte-at-a-time&#34;&gt;Fixing the world, one byte at a time&lt;/h3&gt;&#xA;&lt;p&gt;Hostile takeover - who is the boss now!&lt;/p&gt;</description>
+      <description>&lt;h3 id=&#34;job-description--responsibilities&#34;&gt;Job Description / Responsibilities&lt;/h3&gt;&#xA;&lt;p&gt;Planned and structured the implementation of selected products based on the project&amp;rsquo;s specific framework and budget.&#xA;Executed electrical projects from start to finish.&lt;br&gt;&#xA;Created and managed schedules, communicated with clients and other stakeholders, managed budgets and resources, and ensured that the project met all technical requirements and regulations.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Cooking Grandma</title>
@@ -58,18 +65,18 @@
       <description></description>
     </item>
     <item>
-      <title>Job #2</title>
+      <title>Lead Installer</title>
       <link>http://localhost:1313/experience/job-2/</link>
       <pubDate>Fri, 01 Dec 2023 00:00:00 +0100</pubDate>
       <guid>http://localhost:1313/experience/job-2/</guid>
-      <description>&lt;h3 id=&#34;fixing-the-world-one-byte-at-a-time&#34;&gt;Fixing the world, one byte at a time&lt;/h3&gt;&#xA;&lt;p&gt;Continuing the quest.&lt;/p&gt;</description>
+      <description>&lt;h3 id=&#34;job-description--responsibilities&#34;&gt;Job Description / Responsibilities&lt;/h3&gt;&#xA;&lt;p&gt;Planned tasks, allocated resources, and ensured that the work was completed on time and within budget.&lt;br&gt;&#xA;Responsibilities included training new team members and providing coaching and feedback to help them develop.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Job #1</title>
+      <title>Electrician</title>
       <link>http://localhost:1313/experience/job-1/</link>
       <pubDate>Thu, 01 Dec 2022 00:00:00 +0100</pubDate>
       <guid>http://localhost:1313/experience/job-1/</guid>
-      <description>&lt;h3 id=&#34;fixing-the-world-one-byte-at-a-time&#34;&gt;Fixing the world, one byte at a time&lt;/h3&gt;&#xA;&lt;p&gt;The beginning of a great career.&lt;/p&gt;</description>
+      <description>&lt;h3 id=&#34;job-description--responsibilities&#34;&gt;Job Description / Responsibilities&lt;/h3&gt;&#xA;&lt;p&gt;Installed, repaired, and maintained electrical systems and equipment, including lighting, power supply, communication systems, and other related technologies.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -1,13 +1,12 @@
 ---
 date: 2022-12-01T00:00:00+01:00
 draft: false
-title: "Job #1"
-jobTitle: "Junior Intern"
-company: "Internet Affairs Inc. "
-location: "Stavanger, Norway"
-duration: "2022-2024"
+title: "Electrician"
+jobTitle: "Electrician"
+company: "Krafton"
+location: "Stockholm, Sweden"
+duration: "2013-2015"
 
 ---
-### Fixing the world, one byte at a time
-
-The beginning of a great career. 
+### Job Description / Responsibilities
+Installed, repaired, and maintained electrical systems and equipment, including lighting, power supply, communication systems, and other related technologies.
