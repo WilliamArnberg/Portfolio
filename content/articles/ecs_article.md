@@ -136,10 +136,6 @@ for(Entity entity : q)
 
 Because every archetype is guaranteed to store every entity of that set of components, caching queries becomes as easy as storing an archetype associated with a specific query.
 
-
-
-
-
 #### Systems
 
 Systems are functions with queries.
@@ -155,7 +151,7 @@ Pipelining the systems empowers every decision about the data we are operating o
 <!-- ![](/images/works/ecs.webp) -->
 #### Complete Feature list.
 * Cache-Friendly archetype and SoA (Struct of Arrays) storage.  
-* Handles POD & non POD datatypes, either by letting the compiler auto generate constructors for you or write your own.  
+* Handles POD(Plain Old Data) & non POD datatypes, either by letting the compiler auto generate constructors for you or write your own.  
 * Write free floating queries or add functions to systems that automate and structure the pipelining. 
 
 * Easy to type deterministic Queries that return an range-for iterator returning a view class to each entity in that query spanning across multiple archetypes.  
