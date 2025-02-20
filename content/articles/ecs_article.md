@@ -13,12 +13,14 @@ summary: "During our second year, I designed and implemented my own Archetype-ba
 # 
 ---
 
-At the beginning of our second year at ***The Game Assembly*** we get the opportunity to build our own game engines, and in the previous year I got a lot of experience working in a more pure object-oriented way using GameObject component systems riddled with virtual functions causing cache misses at every function call. 
+At the beginning of our second year at ***The Game Assembly*** we get the opportunity to build our own game engines,
+and in the previous year I got a lot of experience working in a more pure object-oriented way using GameObject component systems
+riddled with virtual functions causing cache misses at every function call. 
 
-Having dug through the trenches and seen what problems could arise making games with a object oriented and inheritance based model I felt a major lacking of knowledge towards a the data oriented way of programming I had seen a lot of GDC / CPPCon talks about.  
+Having dug through the trenches and seen what problems could arise making games with a object oriented
+and inheritance based model I felt a major lacking of knowledge towards a the data oriented way of programming I had seen a lot of GDC / CPPCon talks about.  
 The 2014 CPPcon Mike Acton talk was a huge inspiration.
-## Design Choices
-Early on I had a list of 
+## Design Choices - Archetype Or Sparse-Sets
 
 ##### Sparse Sets
  Components are stored in sparse-sets where the entity id's map to the component.  
@@ -27,17 +29,15 @@ Early on I had a list of
 Adding and removing components are O(1), is less complicated and faster than the archetype way.
     
 ##### Archetypes 
-Components are stored in packed tables of contiguous memory blocks where entities and component ids act as row and column identifiers.
+Components are stored in packed tables of contiguous memory blocks where entities and component ids act as row and column identifiers.    
+The archetypal pattern seemed intriguing and reading the blog posts of Sander Mertens inspired me too begin building my own.
     
-The archetypal pattern seemed intriguing and was at the time easier for me to understand and comprehend, I felt it was easier to reason about.
-    
+
 When desiging the ECS I was deadset on keeping the user interface as simple as possible my mantra was "Every programmer on my team need to love using this tool".  
 The core design pillars I employed were:
 - simplicity 
-- safety
+- safety 
 - speed
-
-Early on in the development developers on my team had a strong wish to be able to store Non-POD datatypes such as strings, vectors and functors.
 
 ## Core Concepts
 A lot of the code have been stripped for display purposes, if you want the full project with more examples please visit my  [Git](https://github.com/WilliamArnberg/World).
@@ -50,10 +50,11 @@ An entity is a unique identifier that represents a game object. It does not cont
 
 ##### Components
 Components are user created [POD](https://learn.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=msvc-170#pod-types) or Non-POD data structures that store data about an entity. 
-
+Tagging entities are as simple as adding an empty component struct to the entity.
+This technique is used because it gives a type safe way of identifying an entity or a group of entities by using the same query system used for normal components.
 #### Component Storage
-
 Each Component type is stored in a column which consists of a contiguous data buffer, and type-erasure information.
+The type erasure information is needed because the Archetype is storing complex data types that are non POD.
 
 ```cpp
 class Column 
@@ -65,7 +66,10 @@ class Column
 }
 ```
 The Type erasure data each column hold is filled up automatically when the user calls `AddComponent<T>();` 
-Storing type-erased constructors enables the use of modern C++ functionalities.
+Storing type-erased constructors enables the use of modern C++ functionalities, such as component holding a `std::function` or simply a `std::string` in some ECS systems only trivial data types is allowed.
+I believe the reduced complexity of having the ability to store Non-POD data is strongly outweighing the negligible speed boosts of storing only POD.
+
+
 ```cpp
 struct ComponentTypeInfo
 {
@@ -101,7 +105,7 @@ Putting the design together gives us a clever way of organizing data, empowering
 
 #### Queries
 
-Queries is a way to quickly find every entity that match a list of component and/or tags.
+Queries are a way to quickly find every entity that match a list of component and/or tags.
 
 ```cpp  
 QueryIterator q = world.query<Position,Rotation,Scale>();
@@ -142,6 +146,7 @@ Systems are functions with queries.
 Systems can be added with a simple call of `world.system([](){ //Do Stuff },Pipeline::OnUpdate);`
 
 Pipelining the systems empowers every decision about the data we are operating on as we can for a fact know in what state each data is at every point of execution in our codebase.
+
 
 
 ## Improvements
