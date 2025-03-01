@@ -136,18 +136,20 @@
         </aside>
 
         <div class="row flex-column-reverse flex-md-row rad-fade-down">
-          <div class="col-12"><p>At the beginning of our second year at <em><strong>The Game Assembly</strong></em> we get the opportunity to build our own game engines, and in the previous year I got a lot of experience working in a more pure object-oriented way using GameObject component systems riddled with virtual functions causing cache misses at every function call.</p>
-<p>Having dug through the trenches and seen what problems could arise making games with a object oriented and inheritance based model I felt a major lacking of knowledge towards a the data oriented way of programming I had seen a lot of GDC / CPPCon talks about.<br>
+          <div class="col-12"><p>At the beginning of our second year at <em><strong>The Game Assembly</strong></em> we get the opportunity to build our own game engines,
+and in the previous year I got a lot of experience working in a more pure object-oriented way using GameObject component systems
+riddled with virtual functions causing cache misses at every function call.</p>
+<p>Having dug through the trenches and seen what problems could arise making games with a object oriented
+and inheritance based model I felt a major lacking of knowledge towards a the data oriented way of programming I had seen a lot of GDC / CPPCon talks about.<br>
 The 2014 CPPcon Mike Acton talk was a huge inspiration.</p>
-<h2 id="design-choices">Design Choices</h2>
-<p>Early on I had a list of</p>
+<h2 id="design-choices---archetype-or-sparse-sets">Design Choices - Archetype Or Sparse-Sets</h2>
 <h5 id="sparse-sets">Sparse Sets</h5>
 <p>Components are stored in sparse-sets where the entity id&rsquo;s map to the component.<br>
-<img src="/images/ecs/sparse.png" alt=""></p>
+<img src="/images/ecs/sparse.png"></p>
 <p>Adding and removing components are O(1), is less complicated and faster than the archetype way.</p>
 <h5 id="archetypes">Archetypes</h5>
-<p>Components are stored in packed tables of contiguous memory blocks where entities and component ids act as row and column identifiers.</p>
-<p>The archetypal pattern seemed intriguing and was at the time easier for me to understand and comprehend, I felt it was easier to reason about.</p>
+<p>Components are stored in packed tables of contiguous memory blocks where entities and component ids act as row and column identifiers. <br>
+The archetypal pattern seemed intriguing and reading the blog posts of Sander Mertens inspired me too begin building my own.</p>
 <p>When desiging the ECS I was deadset on keeping the user interface as simple as possible my mantra was &ldquo;Every programmer on my team need to love using this tool&rdquo;.<br>
 The core design pillars I employed were:</p>
 <ul>
@@ -155,16 +157,18 @@ The core design pillars I employed were:</p>
 <li>safety</li>
 <li>speed</li>
 </ul>
-<p>Early on in the development developers on my team had a strong wish to be able to store Non-POD datatypes such as strings, vectors and functors.</p>
 <h2 id="core-concepts">Core Concepts</h2>
 <p>A lot of the code have been stripped for display purposes, if you want the full project with more examples please visit my  <a href="https://github.com/WilliamArnberg/World">Git</a>.</p>
 <h5 id="entity">Entity</h5>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">using</span> entity <span style="color:#f92672">=</span> <span style="color:#66d9ef">uint64_t</span>;
 </span></span></code></pre></div><p>An entity is a unique identifier that represents a game object. It does not contain any data or logic itself but serves as a reference for components.</p>
 <h5 id="components">Components</h5>
-<p>Components are user created <a href="https://learn.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=msvc-170#pod-types">POD</a> or Non-POD data structures that store data about an entity.</p>
+<p>Components are user created <a href="https://learn.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=msvc-170#pod-types">POD</a> or Non-POD data structures that store data about an entity.
+Tagging entities are as simple as adding an empty component struct to the entity.
+This technique is used because it gives a type safe way of identifying an entity or a group of entities by using the same query system used for normal components.</p>
 <h4 id="component-storage">Component Storage</h4>
-<p>Each Component type is stored in a column which consists of a contiguous data buffer, and type-erasure information.</p>
+<p>Each Component type is stored in a column which consists of a contiguous data buffer, and type-erasure information.
+The type erasure information is needed because the Archetype is storing complex data types that are non POD.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Column</span> 
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>byte[]<span style="color:#f92672">&gt;</span> myBuffer; <span style="color:#75715e">//Component storage
@@ -173,7 +177,8 @@ The core design pillars I employed were:</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	size_t myCurrentMemoryUsed{<span style="color:#ae81ff">0</span>}; 
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The Type erasure data each column hold is filled up automatically when the user calls <code>AddComponent&lt;T&gt;();</code>
-Storing type-erased constructors enables the use of modern C++ functionalities.</p>
+Storing type-erased constructors enables the use of modern C++ functionalities, such as component holding a <code>std::function</code> or simply a <code>std::string</code> in some ECS systems only trivial data types is allowed.
+I believe the reduced complexity of having the ability to store Non-POD data is strongly outweighing the negligible speed boosts of storing only POD.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">ComponentTypeInfo</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    ComponentID typeID;
@@ -197,9 +202,9 @@ Storing type-erased constructors enables the use of modern C++ functionalities.<
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    size_t myMaxCount{<span style="color:#ae81ff">0</span>};
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Putting the design together gives us a clever way of organizing data, empowering us to have fast lookups and fast iterations over contiguous blocks of memory with 0 data fragmentation.<br>
-<img src="/images/ecs/ECS_Layouts.png" alt="image"></p>
+<img alt="image" src="/images/ecs/ECS_Layouts.png"></p>
 <h4 id="queries">Queries</h4>
-<p>Queries is a way to quickly find every entity that match a list of component and/or tags.</p>
+<p>Queries are a way to quickly find every entity that match a list of component and/or tags.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>QueryIterator q <span style="color:#f92672">=</span> world.query<span style="color:#f92672">&lt;</span>Position,Rotation,Scale<span style="color:#f92672">&gt;</span>();
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(Entity entity : q)
 </span></span><span style="display:flex;"><span>{
@@ -224,6 +229,7 @@ For instance say that you want to stream a level, you want to destroy all entiti
 Systems can be added with a simple call of <code>world.system([](){ //Do Stuff },Pipeline::OnUpdate);</code></p>
 <p>Pipelining the systems empowers every decision about the data we are operating on as we can for a fact know in what state each data is at every point of execution in our codebase.</p>
 <h2 id="improvements">Improvements</h2>
+<!-- raw HTML omitted -->
 <h4 id="complete-feature-list">Complete Feature list.</h4>
 <ul>
 <li>
@@ -258,6 +264,8 @@ Returns an range-for iterator returning a view class to each entity in that quer
                     <a class="previous" href="/articles/sp_7/">↩ Game Project 7</a>
                 
                  ■ 
+                
+                    <a class="next" href="/articles/networked_physics_article/"> Networked Physics (WIP) ↪</a>
                 
             </div>
         </aside>

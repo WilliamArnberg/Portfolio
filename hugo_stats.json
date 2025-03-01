@@ -41,7 +41,8 @@
       "style",
       "textarea",
       "title",
-      "ul"
+      "ul",
+      "video"
     ],
     "classes": [
       "about__profile-picture",
@@ -225,7 +226,7 @@
       "components",
       "contact",
       "core-concepts",
-      "design-choices",
+      "design-choices---archetype-or-sparse-sets",
       "education",
       "email",
       "entity",
@@ -239,12 +240,16 @@
       "meta",
       "navbarSupportedContent",
       "portfolio",
+      "procedural-artists",
+      "programmers",
       "projects-single",
       "queries",
       "references",
       "showcase",
       "sparse-sets",
-      "systems"
+      "systems",
+      "the-diner",
+      "welcoming-the-first-customer"
     ]
   }
 }

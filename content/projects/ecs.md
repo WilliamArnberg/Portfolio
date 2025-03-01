@@ -14,14 +14,7 @@ params:
         x: "images/works/ecs.webp"
         _2x: "images/works/ecs.webp"
     
-
-## The content is used for the description of the project
-## For the content, you can use a title and a job description.
-## For example:
-### Fixing the world, one byte at a time
-# The beginning of a great career. 
-# 
 ---
 
-During our second year, I designed and implemented my own Archetype-based ECS in my own game engine. (WIP)
+During our second year, I designed and implemented my own Archetype-based ECS in my own game engine.
 
