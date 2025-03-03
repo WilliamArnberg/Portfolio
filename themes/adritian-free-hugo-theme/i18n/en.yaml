@@ -8,7 +8,7 @@
 - id: "meta_author"
   translation: "William Arnberg"
 - id: "meta_image"
-  translation: "/img/general/og-image.jpg"
+  translation: "assets/images/about/hello.png"
 
 ## Header
 - id: "logo_text1"
@@ -64,8 +64,8 @@
 
 - id: "about_content"
   translation:  <p class="lead">
-    
       </p>
+      I
       <p class="lead">
 
     </p>
@@ -149,19 +149,13 @@
   translation: "Phone Number"
 
 - id: "contact_phone_number"
-  translation: "+555 (11) 123 44 55"
+  translation: "+46 72 447 14 41"
 
 - id: "contact_email_title"
   translation: "Email"
 
 - id: "contact_email_email"
-  translation: '<a href="mailto:mail@example.com">mail@example.com</a>'
-
-- id: "contact_address_title"
-  translation: "Address"
-
-- id: "contact_address_address"
-  translation: "Exact street/neighborhood (you can omit this)<br />Postcode, City"
+  translation: '<a href="mailto:arnberg19@gmail.com">arnberg19@gmail.com</a>'
 
 - id: "contact_button"
   translation: "Send Message"

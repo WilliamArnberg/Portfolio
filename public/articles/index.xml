@@ -13,35 +13,21 @@
       <link>http://localhost:1313/articles/networked_physics_article/</link>
       <pubDate>Sat, 01 Mar 2025 09:53:42 +0200</pubDate>
       <guid>http://localhost:1313/articles/networked_physics_article/</guid>
-      <description>During our second year, I designed and implemented my own Archetype-based ECS in my own game engine.</description>
+      <description>Networked physics simulation with client &amp;amp; server</description>
     </item>
     <item>
-      <title>Entity-Component-System</title>
+      <title>Entity-Component-System (WIP)</title>
       <link>http://localhost:1313/articles/ecs_article/</link>
       <pubDate>Mon, 26 Aug 2024 09:53:42 +0200</pubDate>
       <guid>http://localhost:1313/articles/ecs_article/</guid>
       <description>During our second year, I designed and implemented my own Archetype-based ECS in my own game engine.</description>
     </item>
     <item>
-      <title>Game Project 7</title>
-      <link>http://localhost:1313/articles/sp_7/</link>
-      <pubDate>Mon, 24 Jun 2024 14:38:33 +0200</pubDate>
-      <guid>http://localhost:1313/articles/sp_7/</guid>
-      <description>&lt;p&gt;Sample blog content. Like a lorem ipsum but saying something more interesting.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Example image&#34; src=&#34;http://localhost:1313/img/blog/feature-sample-3.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Welcome to the world of &amp;ldquo;Content Ipsum,&amp;rdquo; the fresh alternative to the classic lorem ipsum. It&amp;rsquo;s the perfect blend for designers and writers who crave a dash of creativity and meaning in their placeholder text. Imagine a text that not only fills the space but also sparks the imagination, a text that weaves tales of innovation, inspiration, and the endless possibilities that creativity brings.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Game Project 8</title>
-      <link>http://localhost:1313/articles/sp_8/</link>
-      <pubDate>Mon, 24 Jun 2024 14:38:33 +0200</pubDate>
-      <guid>http://localhost:1313/articles/sp_8/</guid>
-      <description>&lt;p&gt;Sample blog content. Like a lorem ipsum but saying something more interesting.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Example image&#34; src=&#34;http://localhost:1313/img/blog/kanba.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Welcome to the world of &amp;ldquo;Content Ipsum,&amp;rdquo; the fresh alternative to the classic lorem ipsum. It&amp;rsquo;s the perfect blend for designers and writers who crave a dash of creativity and meaning in their placeholder text. Imagine a text that not only fills the space but also sparks the imagination, a text that weaves tales of innovation, inspiration, and the endless possibilities that creativity brings.&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>Cooking Grandma</title>
-      <link>http://localhost:1313/articles/cooking_grandma/</link>
-      <pubDate>Fri, 02 Feb 2024 04:14:54 -0800</pubDate>
-      <guid>http://localhost:1313/articles/cooking_grandma/</guid>
-      <description>&lt;p&gt;You play as a Chef who is running a diner in a busy part of town, the chef is serving a most unusual customer.&lt;/p&gt;&#xA;&lt;h5 id=&#34;the-diner&#34;&gt;The Diner&lt;/h5&gt;&#xA;&#xD;&#xA;&lt;video autoplay loop width=&#34;800&#34; height=&#34;450&#34; controls&gt;&#xD;&#xA;    &lt;source src=&#34;http://localhost:1313/videos/Cooking_Intro.mp4&#34; type=&#34;video/mp4&#34;&gt;&#xD;&#xA;    Your browser does not support the video tag.&#xD;&#xA;&lt;/video&gt;&#xD;&#xA;&#xD;&#xA;&#xA;&lt;h5 id=&#34;welcoming-the-first-customer&#34;&gt;Welcoming the first customer!&lt;/h5&gt;&#xA;&#xD;&#xA;&lt;video autoplay loop width=&#34;800&#34; height=&#34;450&#34; controls&gt;&#xD;&#xA;    &lt;source src=&#34;http://localhost:1313/videos/Cooking_Customer.mp4&#34; type=&#34;video/mp4&#34;&gt;&#xD;&#xA;    Your browser does not support the video tag.&#xD;&#xA;&lt;/video&gt;&#xD;&#xA;&#xD;&#xA;&#xA;&lt;p&gt;A student led Game Jam of 5 students&lt;/p&gt;&#xA;&lt;h5 id=&#34;programmers&#34;&gt;Programmers:&lt;/h5&gt;&#xA;&lt;p&gt;William Arnberg&lt;br&gt;&#xA;Gustaf Engsner&lt;br&gt;&#xA;Emrik Åberg Wenthzel&lt;/p&gt;&#xA;&lt;h5 id=&#34;procedural-artists&#34;&gt;Procedural Artists:&lt;/h5&gt;&#xA;&lt;p&gt;Carl Andersson&lt;br&gt;&#xA;Hampus Helin&lt;/p&gt;</description>
+      <link>http://localhost:1313/articles/cooking_grandma_article/</link>
+      <pubDate>Fri, 01 Mar 2024 09:53:42 +0200</pubDate>
+      <guid>http://localhost:1313/articles/cooking_grandma_article/</guid>
+      <description>Gamejam</description>
     </item>
   </channel>
 </rss>
