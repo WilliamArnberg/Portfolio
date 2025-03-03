@@ -94,7 +94,7 @@
   translation: "Download resume"
 
 - id: "experience_button2_url"
-  translation: "/william_arnberg_cv.pdf"
+  translation: "cv/william_arnberg_cv.pdf"
 
 - id: "experience_button3"
   translation: "View all"
