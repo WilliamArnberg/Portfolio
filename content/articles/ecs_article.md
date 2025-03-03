@@ -168,6 +168,7 @@ Demo compiled using Emscripten and Raylib, running a simulation of Boids using a
 
 {{< wasm_game >}}
 
+
 <!-- ![](/images/works/ecs.webp) -->
 <!-- #### Complete Feature list.
 * Cache-Friendly archetype and SoA (Struct of Arrays) storage.  

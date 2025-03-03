@@ -11,8 +11,8 @@ params:
         btnText: "Read More"
         URL: "https://williamarnberg.github.io/Portfolio/articles/ecs_article/"
     image:  
-        x: "images/works/ecs.webp"
-        _2x: "images/works/ecs.webp"
+        x: "images/ecs/demo.png"
+        _2x: "images/ecs/demo.png"
     
 ---
 
