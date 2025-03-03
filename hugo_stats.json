@@ -22,6 +22,7 @@
       "header",
       "html",
       "i",
+      "iframe",
       "img",
       "input",
       "li",
@@ -226,6 +227,7 @@
       "components",
       "contact",
       "core-concepts",
+      "demo",
       "design-choices---archetype-or-sparse-sets",
       "education",
       "email",
@@ -249,6 +251,7 @@
       "sparse-sets",
       "systems",
       "the-diner",
+      "wasm-game-container",
       "welcoming-the-first-customer"
     ]
   }

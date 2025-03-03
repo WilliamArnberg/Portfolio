@@ -143,7 +143,31 @@ Because every archetype is guaranteed to store every entity of that set of compo
 #### Systems
 
 Systems are functions with queries.
-Systems can be added with a simple call of `world.system([](){ //Do Stuff },Pipeline::OnUpdate);`
+
+```cpp  
+//Systems can be added
+
+World.system("Move Entity",[]()
+{
+    for(Entity entity : World.Query<Position,Rotation,Scale,Velocity>())
+    {
+
+        Position* position = entity.GetComponent<Position>();   
+        Velocity* velocity = entity.GetComponent<Velocity>();
+        position += velocity;   
+
+    }   
+},ecs::Pipeline::OnUpdate);
+
+//Systems can be removed
+World.RemoveSystem("Move Entity",ecs::Pipeline::OnUpdate);
+
+
+
+```
+
+Removing a system puts it into a queue where it will get removed from the SystemManager at the end of the frame.
+
 
 Pipelining the systems empowers every decision about the data we are operating on as we can for a fact know in what state each data is at every point of execution in our codebase.
 
@@ -165,6 +189,11 @@ Pipelining the systems empowers every decision about the data we are operating o
 Returns an range-for iterator returning a view class to each entity in that query spanning across multiple archetypes.  
 
 * Cached Queries, that only gets reset if the underlying memory of the archetype changes. 
+
+#### Demo
+
+{{< wasm_game >}}
+
 
 ###### References
 <https://research.swtch.com/sparse>

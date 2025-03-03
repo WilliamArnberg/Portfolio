@@ -225,8 +225,24 @@ For instance say that you want to stream a level, you want to destroy all entiti
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
 </span></span></code></pre></div><p>Because every archetype is guaranteed to store every entity of that set of components, caching queries becomes as easy as storing an archetype associated with a specific query.</p>
 <h4 id="systems">Systems</h4>
-<p>Systems are functions with queries.
-Systems can be added with a simple call of <code>world.system([](){ //Do Stuff },Pipeline::OnUpdate);</code></p>
+<p>Systems are functions with queries.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">//Systems can be added
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>World.system(<span style="color:#e6db74">&#34;Move Entity&#34;</span>,[]()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(Entity entity : World.Query<span style="color:#f92672">&lt;</span>Position,Rotation,Scale,Velocity<span style="color:#f92672">&gt;</span>())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Position<span style="color:#f92672">*</span> position <span style="color:#f92672">=</span> entity.GetComponent<span style="color:#f92672">&lt;</span>Position<span style="color:#f92672">&gt;</span>();   
+</span></span><span style="display:flex;"><span>        Velocity<span style="color:#f92672">*</span> velocity <span style="color:#f92672">=</span> entity.GetComponent<span style="color:#f92672">&lt;</span>Velocity<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>        position <span style="color:#f92672">+=</span> velocity;   
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }   
+</span></span><span style="display:flex;"><span>},ecs<span style="color:#f92672">::</span>Pipeline<span style="color:#f92672">::</span>OnUpdate);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Systems can be removed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>World.RemoveSystem(<span style="color:#e6db74">&#34;Move Entity&#34;</span>,ecs<span style="color:#f92672">::</span>Pipeline<span style="color:#f92672">::</span>OnUpdate);
+</span></span></code></pre></div><p>Removing a system puts it into a queue where it will get removed from the SystemManager at the end of the frame.</p>
 <p>Pipelining the systems empowers every decision about the data we are operating on as we can for a fact know in what state each data is at every point of execution in our codebase.</p>
 <h2 id="improvements">Improvements</h2>
 <!-- raw HTML omitted -->
@@ -252,6 +268,10 @@ Returns an range-for iterator returning a view class to each entity in that quer
 <p>Cached Queries, that only gets reset if the underlying memory of the archetype changes.</p>
 </li>
 </ul>
+<h4 id="demo">Demo</h4>
+<div id="wasm-game-container">
+    <iframe src="/game/my_target.html" width="800" height="600" style="border: none;"></iframe>
+</div>
 <h6 id="references">References</h6>
 <p><a href="https://research.swtch.com/sparse">https://research.swtch.com/sparse</a></p>
 </div>
