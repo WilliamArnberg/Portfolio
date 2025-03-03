@@ -9,7 +9,7 @@ params:
     button:
         icon: "icon-arrow-right"
         btnText: "Read More"
-        URL: "https://williamarnberg.github.io/Portfolio/articles/Networked_Physics_Article/"
+        URL: "https://williamarnberg.com/articles/networked_physics_article/"
     image:  
         x: "images/works/ecs.webp"
         _2x: "images/works/ecs.webp"
