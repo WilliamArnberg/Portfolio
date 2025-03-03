@@ -168,19 +168,6 @@ Demo compiled using Emscripten and Raylib, running a simulation of Boids using a
 
 {{< wasm_game >}}
 
-<!-- ![](/images/works/ecs.webp) -->
-<!-- #### Complete Feature list.
-* Cache-Friendly archetype and SoA (Struct of Arrays) storage.  
-* Handles POD(Plain Old Data) & non POD datatypes, either by letting the compiler auto generate constructors for you or write your own.  
-* Write free floating queries or add functions to systems that automate and structure the pipelining. 
-
-* Easy to type deterministic Queries that return an range-for iterator returning a view class to each entity in that query spanning across multiple archetypes.  
-
-* Filtered Queries for when you need all entities containing N types as long as they don't contain M types.
-Returns an range-for iterator returning a view class to each entity in that query spanning across multiple archetypes.  
-
-* Cached Queries, that only gets reset if the underlying memory of the archetype changes.  -->
-
 ###### References
 <https://ajmmertens.medium.com/>  
 <https://research.swtch.com/sparse>
