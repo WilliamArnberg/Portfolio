@@ -11,7 +11,7 @@ showcase:
 
   button:
     icon: "icon-email"
-    URL: "https://www.adrianmoreno.info/"
+    URL: "https://williamarnberg.com/#contact"
 
   socialLinks:
     - icon: "linkedin"
@@ -37,7 +37,7 @@ education:
   items:
     - university: "The Game Assembly"
       year: "2012-2017"
-      degree: "Bachelor of Applied Science (BASc), Electrical Engineering"
+      degree: "Game Developer"
 
 
 
