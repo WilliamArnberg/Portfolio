@@ -3,14 +3,6 @@ date: '2024-08-26T09:53:42+02:00' # date in which the content is created - defau
 title: 'Entity-Component-System'
 draft: false # set to "true" if you want to hide the content 
 summary: "During our second year, I designed and implemented my own Archetype-based ECS in my own game engine."
-    
-
-## The content is used for the description of the project
-## For the content, you can use a title and a job description.
-## For example:
-### Fixing the world, one byte at a time
-# The beginning of a great career. 
-# 
 ---
 
 At the beginning of our second year at ***The Game Assembly*** we get the opportunity to build our own game engines,
@@ -20,7 +12,7 @@ riddled with virtual functions causing cache misses at every function call.
 Having dug through the trenches and seen what problems could arise making games with a object oriented
 and inheritance based model I felt a major lacking of knowledge towards a the data oriented way of programming I had seen a lot of GDC / CPPCon talks about.  
 The 2014 CPPcon Mike Acton talk was a huge inspiration.
-## Design Choices - Archetype Or Sparse-Sets
+### Design Choices - Archetype Or Sparse-Sets
 
 ##### Sparse Sets
  Components are stored in sparse-sets where the entity id's map to the component.  
@@ -39,7 +31,7 @@ The core design pillars I employed were:
 - safety 
 - speed
 
-## Core Concepts
+### Core Concepts
 A lot of the code have been stripped for display purposes, if you want the full project with more examples please visit my  [Git](https://github.com/WilliamArnberg/World).
 
 ##### Entity
@@ -52,7 +44,7 @@ An entity is a unique identifier that represents a game object. It does not cont
 Components are user created [POD](https://learn.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=msvc-170#pod-types) or Non-POD data structures that store data about an entity. 
 Tagging entities are as simple as adding an empty component struct to the entity.
 This technique is used because it gives a type safe way of identifying an entity or a group of entities by using the same query system used for normal components.
-#### Component Storage
+### Component Storage
 Each Component type is stored in a column which consists of a contiguous data buffer, and type-erasure information.
 The type erasure information is needed because the Archetype is storing complex data types that are non POD.
 
@@ -171,14 +163,13 @@ Removing a system puts it into a queue where it will get removed from the System
 
 Pipelining the systems empowers every decision about the data we are operating on as we can for a fact know in what state each data is at every point of execution in our codebase.
 
+#### Demo
+Demo compiled using Emscripten and Raylib, running a simulation of Boids using a Data-oriented approach with the Entity-Component-System
 
-
-## Improvements
-  
-
+{{< wasm_game >}}
 
 <!-- ![](/images/works/ecs.webp) -->
-#### Complete Feature list.
+<!-- #### Complete Feature list.
 * Cache-Friendly archetype and SoA (Struct of Arrays) storage.  
 * Handles POD(Plain Old Data) & non POD datatypes, either by letting the compiler auto generate constructors for you or write your own.  
 * Write free floating queries or add functions to systems that automate and structure the pipelining. 
@@ -188,12 +179,8 @@ Pipelining the systems empowers every decision about the data we are operating o
 * Filtered Queries for when you need all entities containing N types as long as they don't contain M types.
 Returns an range-for iterator returning a view class to each entity in that query spanning across multiple archetypes.  
 
-* Cached Queries, that only gets reset if the underlying memory of the archetype changes. 
-
-#### Demo
-
-{{< wasm_game >}}
-
+* Cached Queries, that only gets reset if the underlying memory of the archetype changes.  -->
 
 ###### References
+<https://ajmmertens.medium.com/>  
 <https://research.swtch.com/sparse>

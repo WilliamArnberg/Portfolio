@@ -142,7 +142,7 @@ riddled with virtual functions causing cache misses at every function call.</p>
 <p>Having dug through the trenches and seen what problems could arise making games with a object oriented
 and inheritance based model I felt a major lacking of knowledge towards a the data oriented way of programming I had seen a lot of GDC / CPPCon talks about.<br>
 The 2014 CPPcon Mike Acton talk was a huge inspiration.</p>
-<h2 id="design-choices---archetype-or-sparse-sets">Design Choices - Archetype Or Sparse-Sets</h2>
+<h3 id="design-choices---archetype-or-sparse-sets">Design Choices - Archetype Or Sparse-Sets</h3>
 <h5 id="sparse-sets">Sparse Sets</h5>
 <p>Components are stored in sparse-sets where the entity id&rsquo;s map to the component.<br>
 <img src="/images/ecs/sparse.png"></p>
@@ -157,7 +157,7 @@ The core design pillars I employed were:</p>
 <li>safety</li>
 <li>speed</li>
 </ul>
-<h2 id="core-concepts">Core Concepts</h2>
+<h3 id="core-concepts">Core Concepts</h3>
 <p>A lot of the code have been stripped for display purposes, if you want the full project with more examples please visit my  <a href="https://github.com/WilliamArnberg/World">Git</a>.</p>
 <h5 id="entity">Entity</h5>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">using</span> entity <span style="color:#f92672">=</span> <span style="color:#66d9ef">uint64_t</span>;
@@ -166,7 +166,7 @@ The core design pillars I employed were:</p>
 <p>Components are user created <a href="https://learn.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=msvc-170#pod-types">POD</a> or Non-POD data structures that store data about an entity.
 Tagging entities are as simple as adding an empty component struct to the entity.
 This technique is used because it gives a type safe way of identifying an entity or a group of entities by using the same query system used for normal components.</p>
-<h4 id="component-storage">Component Storage</h4>
+<h3 id="component-storage">Component Storage</h3>
 <p>Each Component type is stored in a column which consists of a contiguous data buffer, and type-erasure information.
 The type erasure information is needed because the Archetype is storing complex data types that are non POD.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Column</span> 
@@ -244,36 +244,17 @@ For instance say that you want to stream a level, you want to destroy all entiti
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>World.RemoveSystem(<span style="color:#e6db74">&#34;Move Entity&#34;</span>,ecs<span style="color:#f92672">::</span>Pipeline<span style="color:#f92672">::</span>OnUpdate);
 </span></span></code></pre></div><p>Removing a system puts it into a queue where it will get removed from the SystemManager at the end of the frame.</p>
 <p>Pipelining the systems empowers every decision about the data we are operating on as we can for a fact know in what state each data is at every point of execution in our codebase.</p>
-<h2 id="improvements">Improvements</h2>
-<!-- raw HTML omitted -->
-<h4 id="complete-feature-list">Complete Feature list.</h4>
-<ul>
-<li>
-<p>Cache-Friendly archetype and SoA (Struct of Arrays) storage.</p>
-</li>
-<li>
-<p>Handles POD(Plain Old Data) &amp; non POD datatypes, either by letting the compiler auto generate constructors for you or write your own.</p>
-</li>
-<li>
-<p>Write free floating queries or add functions to systems that automate and structure the pipelining.</p>
-</li>
-<li>
-<p>Easy to type deterministic Queries that return an range-for iterator returning a view class to each entity in that query spanning across multiple archetypes.</p>
-</li>
-<li>
-<p>Filtered Queries for when you need all entities containing N types as long as they don&rsquo;t contain M types.
-Returns an range-for iterator returning a view class to each entity in that query spanning across multiple archetypes.</p>
-</li>
-<li>
-<p>Cached Queries, that only gets reset if the underlying memory of the archetype changes.</p>
-</li>
-</ul>
 <h4 id="demo">Demo</h4>
+<p>Demo compiled using Emscripten and Raylib, running a simulation of Boids using a Data-oriented approach with the Entity-Component-System</p>
 <div id="wasm-game-container">
     <iframe src="/game/my_target.html" width="800" height="600" style="border: none;"></iframe>
 </div>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <h6 id="references">References</h6>
-<p><a href="https://research.swtch.com/sparse">https://research.swtch.com/sparse</a></p>
+<p><a href="https://ajmmertens.medium.com/">https://ajmmertens.medium.com/</a><br>
+<a href="https://research.swtch.com/sparse">https://research.swtch.com/sparse</a></p>
 </div>
         </div>
 
