@@ -10833,13 +10833,13 @@ sup {
 
 /** main style **/
 .header .navbar-brand span:first-child {
-  color: #478079; }
+  color: #8BAAAD; }
 
 .header .container {
   padding-left: 10px; }
 
 html body ::selection {
-  background-color: #488079;
+  background-color: #8BAAAD;
   color: #fff; }
 
 .container {
@@ -10941,7 +10941,7 @@ span a {
 
 p a:hover,
 span a:hover {
-  color: #478079;
+  color: #8BAAAD;
   text-decoration: none; }
 
 .lead {
@@ -11054,7 +11054,7 @@ footer_links .nav-item .nav-link::after {
   background-color: #202020 !important; }
 
 [data-bs-theme="dark"] .testimonial__author-info span {
-  color: #F18983 !important; }
+  color: #8BAAAD !important; }
 
 [data-bs-theme="dark"] .section--contact .container {
   background-color: #181818 !important; }
