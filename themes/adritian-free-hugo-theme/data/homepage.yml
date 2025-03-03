@@ -73,7 +73,7 @@ testimonial:
 contact:
   enable: true
   form:
-    action: "#"
+    action: https://bitter-snowflake-ee17.arnberg19.workers.dev/
   button:
     icon: "icon-email"
 
