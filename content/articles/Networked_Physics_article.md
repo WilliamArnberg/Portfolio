@@ -2,7 +2,7 @@
 date: '2025-03-01T09:53:42+02:00' # date in which the content is created - defaults to "today"
 title: 'Networked Physics (WIP)'
 draft: false # set to "true" if you want to hide the content 
-summary: "Networked physics simulation with client & server"
+summary: "Networked physics simulation with custom client & server"
     
 
 ## The content is used for the description of the project
@@ -12,3 +12,5 @@ summary: "Networked physics simulation with client & server"
 # The beginning of a great career. 
 # 
 ---
+
+

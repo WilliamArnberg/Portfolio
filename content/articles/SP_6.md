@@ -1,5 +1,5 @@
 +++
-title = 'Game Project 8 (WIP)'
+title = 'Landfisk'
 date = 2024-06-24T14:38:33+02:00
 draft = true
 type = 'blog'
@@ -10,7 +10,7 @@ type = 'blog'
 
 Sample blog content. Like a lorem ipsum but saying something more interesting.
 
-![Example image](/img/blog/kanba.png)
+![Example image](/img/blog/feature-sample-3.png)
 
 Welcome to the world of "Content Ipsum," the fresh alternative to the classic lorem ipsum. It's the perfect blend for designers and writers who crave a dash of creativity and meaning in their placeholder text. Imagine a text that not only fills the space but also sparks the imagination, a text that weaves tales of innovation, inspiration, and the endless possibilities that creativity brings.
 

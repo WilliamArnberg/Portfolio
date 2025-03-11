@@ -14,11 +14,10 @@ and inheritance based model I felt a major lacking of knowledge towards a the da
 The 2014 CPPcon Mike Acton talk was a huge inspiration.
 ### Design Choices - Archetype Or Sparse-Sets
 
+When doing research about which design choice I were to make I found there are two popularized ways to design a Entity-Component-System.
 ##### Sparse Sets
- Components are stored in sparse-sets where the entity id's map to the component.  
-![](images/ecs/sparse.png)  
-    
-Adding and removing components are O(1), is less complicated and faster than the archetype way.
+Components are stored in sparse-sets where the entity id's map to the component.  
+Adding and removing components is O(1), is less complicated and faster than removing and adding components in an archetype ECS.
     
 ##### Archetypes 
 Components are stored in packed tables of contiguous memory blocks where entities and component ids act as row and column identifiers.    
@@ -165,6 +164,7 @@ Pipelining the systems empowers every decision about the data we are operating o
 
 #### Demo
 Demo compiled using Emscripten and Raylib, running a simulation of Boids using a Data-oriented approach with the Entity-Component-System
+The demo is currently running with an algorithmic complexity of O(n^2) where each boid have is testing against every other boid in the simulation.  
 
 {{< wasm_game >}}
 
