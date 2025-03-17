@@ -20,7 +20,7 @@
       <link>http://localhost:1313/articles/networked_physics_article/</link>
       <pubDate>Sat, 01 Mar 2025 09:53:42 +0200</pubDate>
       <guid>http://localhost:1313/articles/networked_physics_article/</guid>
-      <description>Networked physics simulation with client &amp;amp; server</description>
+      <description>Networked physics simulation with custom client &amp;amp; server</description>
     </item>
     <item>
       <title>Electrical Designer</title>
@@ -77,6 +77,27 @@
       <pubDate>Thu, 01 Dec 2022 00:00:00 +0100</pubDate>
       <guid>http://localhost:1313/experience/job-1/</guid>
       <description>&lt;h3 id=&#34;job-description--responsibilities&#34;&gt;Job Description / Responsibilities&lt;/h3&gt;&#xA;&lt;p&gt;Installed, repaired, and maintained electrical systems and equipment, including lighting, power supply, communication systems, and other related technologies.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/articles/sp_1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/sp_1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/articles/sp_3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/sp_3/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/articles/sp_4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/sp_4/</guid>
+      <description></description>
     </item>
   </channel>
 </rss>

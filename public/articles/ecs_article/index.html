@@ -143,10 +143,10 @@ riddled with virtual functions causing cache misses at every function call.</p>
 and inheritance based model I felt a major lacking of knowledge towards a the data oriented way of programming I had seen a lot of GDC / CPPCon talks about.<br>
 The 2014 CPPcon Mike Acton talk was a huge inspiration.</p>
 <h3 id="design-choices---archetype-or-sparse-sets">Design Choices - Archetype Or Sparse-Sets</h3>
+<p>When doing research about which design choice I were to make I found there are two popularized ways to design a Entity-Component-System.</p>
 <h5 id="sparse-sets">Sparse Sets</h5>
 <p>Components are stored in sparse-sets where the entity id&rsquo;s map to the component.<br>
-<img src="/images/ecs/sparse.png"></p>
-<p>Adding and removing components are O(1), is less complicated and faster than the archetype way.</p>
+Adding and removing components is O(1), is less complicated and faster than removing and adding components in an archetype ECS.</p>
 <h5 id="archetypes">Archetypes</h5>
 <p>Components are stored in packed tables of contiguous memory blocks where entities and component ids act as row and column identifiers. <br>
 The archetypal pattern seemed intriguing and reading the blog posts of Sander Mertens inspired me too begin building my own.</p>
@@ -202,7 +202,7 @@ I believe the reduced complexity of having the ability to store Non-POD data is 
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    size_t myMaxCount{<span style="color:#ae81ff">0</span>};
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Putting the design together gives us a clever way of organizing data, empowering us to have fast lookups and fast iterations over contiguous blocks of memory with 0 data fragmentation.<br>
-<img alt="image" src="/images/ecs/ECS_Layouts.png"></p>
+<img src="/images/ecs/ECS_Layouts.png" alt="image"></p>
 <h4 id="queries">Queries</h4>
 <p>Queries are a way to quickly find every entity that match a list of component and/or tags.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>QueryIterator q <span style="color:#f92672">=</span> world.query<span style="color:#f92672">&lt;</span>Position,Rotation,Scale<span style="color:#f92672">&gt;</span>();
@@ -245,7 +245,8 @@ For instance say that you want to stream a level, you want to destroy all entiti
 </span></span></code></pre></div><p>Removing a system puts it into a queue where it will get removed from the SystemManager at the end of the frame.</p>
 <p>Pipelining the systems empowers every decision about the data we are operating on as we can for a fact know in what state each data is at every point of execution in our codebase.</p>
 <h4 id="demo">Demo</h4>
-<p>Demo compiled using Emscripten and Raylib, running a simulation of Boids using a Data-oriented approach with the Entity-Component-System</p>
+<p>Demo compiled using Emscripten and Raylib, running a simulation of Boids using a Data-oriented approach with the Entity-Component-System
+The demo is currently running with an algorithmic complexity of O(n^2) where each boid have is testing against every other boid in the simulation.</p>
 <div id="wasm-game-container">
     <iframe src="https://williamarnberg.com/game/index.html" width="800" height="600" style="border: none;"></iframe>
 </div>
@@ -273,35 +274,29 @@ For instance say that you want to stream a level, you want to destroy all entiti
     <footer class="footer w-100">
   <div class="container">
     <div class="container-fluid">
-      <div class="row w-100 align-items-center">
-        <div class="footer_left col-12 col-lg-4 mb-3 mb-lg-0 text-center text-lg-start">
-          <div class="footer__copy">
-            <span></span>
-          </div>
-        </div>
-        <div class="footer_links col-12 col-lg-6 mb-3 mb-lg-0 text-center text-lg-start">
-          <ul class="navbar-nav w-100 align-items-center justify-content-center justify-content-lg-start d-flex flex-wrap gap-2">
-            <li class="nav-item">
-              <a class="nav-link px-2" href="/"
-                >🏠 HOME</a
+      <div class="footer_links col-12 col-lg-6 mb-3 mb-lg-0 text-center text-lg-start">
+        <ul class="navbar-nav w-100 align-items-center justify-content-center justify-content-lg-start d-flex flex-wrap gap-2">
+          <li class="nav-item">
+            <a class="nav-link px-2" href="/"
+            >🏠 HOME</a
+            >
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link px-2" href="/#about"
+            >ABOUT</a
               >
             </li>
             
-            <li class="nav-item">
-              <a class="nav-link px-2" href="/#about"
-                >ABOUT</a
+          <li class="nav-item">
+            <a class="nav-link px-2" href="/#portfolio"
+            >PORTFOLIO</a
               >
             </li>
             
-            <li class="nav-item">
-              <a class="nav-link px-2" href="/#portfolio"
-                >PORTFOLIO</a
-              >
-            </li>
-            
-            <li class="nav-item">
-              <a class="nav-link px-2" href="/#contact"
-                >CONTACT</a
+          <li class="nav-item">
+            <a class="nav-link px-2" href="/#contact"
+            >CONTACT</a
               >
             </li>
             
@@ -321,41 +316,41 @@ For instance say that you want to stream a level, you want to destroy all entiti
                 data-bs-toggle="dropdown"
                 data-bs-display="static"
                 aria-label="Toggle theme (light)"
-              >
+                >
                 <span class="theme-icon auto d-none" aria-hidden="true"
-                  ></span
+                ></span
                 >
                 <span class="current-theme">✨ Auto</span>
                 <span class="d-lg-none ms-2 visually-hidden" id="bd-theme-text"
-                  >Toggle theme</span
+                >Toggle theme</span
                 >
               </button>
               <ul
-                class="dropdown-menu dropdown-menu-end dropup"
-                aria-labelledby="bd-theme-text"
-                data-bs-popper="static"
+              class="dropdown-menu dropdown-menu-end dropup"
+              aria-labelledby="bd-theme-text"
+              data-bs-popper="static"
               >
-                <li>
+              <li>
                   <button
                     type="button"
                     class="dropdown-item d-flex align-items-center active"
                     data-bs-theme-value="light"
                     aria-pressed="true"
                   >
-                    ☀️ Light
+                  ☀️ Light
                   </button>
                 </li>
                 <li>
                   <button
-                    type="button"
-                    class="dropdown-item d-flex align-items-center"
-                    data-bs-theme-value="dark"
-                    aria-pressed="false"
+                  type="button"
+                  class="dropdown-item d-flex align-items-center"
+                  data-bs-theme-value="dark"
+                  aria-pressed="false"
                   >
-                    🌑 Dark
-                    <span class="theme-icon dark d-none" aria-hidden="true"
+                  🌑 Dark
+                  <span class="theme-icon dark d-none" aria-hidden="true"
                       ></span
-                    >
+                      >
                   </button>
                 </li>
                 <li>
@@ -364,10 +359,10 @@ For instance say that you want to stream a level, you want to destroy all entiti
                     class="dropdown-item d-flex align-items-center"
                     data-bs-theme-value="auto"
                     aria-pressed="false"
-                  >
+                    >
                     ✨ Auto
                     <span class="theme-icon light d-none" aria-hidden="true"
-                      ></span
+                    ></span
                     >
                   </button>
                 </li>
@@ -376,6 +371,12 @@ For instance say that you want to stream a level, you want to destroy all entiti
             
           </div>
         </div>
+        <div class="row w-100 align-items-center">
+          <div class="footer_left col-12 col-lg-4 mb-3 mb-lg-0 text-center text-lg-start">
+            <div class="footer__copy">
+              <span>I am part of The Game Assembly's internship program. As per the agreement between the Game Industry and The Game Assembly, <br/> neither student nor company may be in contact with one another regarding internships before April 23rd. <br/> Any internship offers can be made on May 6th, at the earliest.</span>
+            </div>
+          </div>
       </div>
     </div>
   </div>
