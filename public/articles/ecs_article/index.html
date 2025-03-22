@@ -143,10 +143,10 @@ riddled with virtual functions causing cache misses at every function call.</p>
 and inheritance based model I felt a major lacking of knowledge towards a the data oriented way of programming I had seen a lot of GDC / CPPCon talks about.<br>
 The 2014 CPPcon Mike Acton talk was a huge inspiration.</p>
 <h3 id="design-choices---archetype-or-sparse-sets">Design Choices - Archetype Or Sparse-Sets</h3>
+<p>When doing research about which design choice I were to make I found there are two popularized ways to design a Entity-Component-System.</p>
 <h5 id="sparse-sets">Sparse Sets</h5>
 <p>Components are stored in sparse-sets where the entity id&rsquo;s map to the component.<br>
-<img src="/images/ecs/sparse.png"></p>
-<p>Adding and removing components are O(1), is less complicated and faster than the archetype way.</p>
+Adding and removing components is O(1), is less complicated and faster than removing and adding components in an archetype ECS.</p>
 <h5 id="archetypes">Archetypes</h5>
 <p>Components are stored in packed tables of contiguous memory blocks where entities and component ids act as row and column identifiers. <br>
 The archetypal pattern seemed intriguing and reading the blog posts of Sander Mertens inspired me too begin building my own.</p>
@@ -245,7 +245,8 @@ For instance say that you want to stream a level, you want to destroy all entiti
 </span></span></code></pre></div><p>Removing a system puts it into a queue where it will get removed from the SystemManager at the end of the frame.</p>
 <p>Pipelining the systems empowers every decision about the data we are operating on as we can for a fact know in what state each data is at every point of execution in our codebase.</p>
 <h4 id="demo">Demo</h4>
-<p>Demo compiled using Emscripten and Raylib, running a simulation of Boids using a Data-oriented approach with the Entity-Component-System</p>
+<p>Demo compiled using Emscripten and Raylib, running a simulation of Boids using a Data-oriented approach with the Entity-Component-System
+The demo is currently running with an algorithmic complexity of O(n^2) where each boid have is testing against every other boid in the simulation.</p>
 <div id="wasm-game-container">
     <iframe src="https://williamarnberg.com/game/index.html" width="800" height="600" style="border: none;"></iframe>
 </div>
