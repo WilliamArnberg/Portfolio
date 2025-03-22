@@ -13,13 +13,13 @@ The game won **Best-Narrative** and the **Students Choice** awards.
 You play as a Chef who is running a diner in a busy part of town, the chef is serving a most unusual customer. <br/>
 
 ##### The Diner
-{{< video src="/videos/Cooking_Intro.mp4" autoplay="true" loop="true" width="800" height="450" >}}  
+{{< video src="/videos/Cooking_Intro.mp4" autoplay="false" loop="true" width="800" height="450" >}}  
 
  
 
 ##### Welcoming the first customer!
 
-{{< video src="/videos/Cooking_Customer.mp4" autoplay="true" loop="true" width="800" height="450" >}}
+{{< video src="/videos/Cooking_Customer.mp4" autoplay="false" loop="true" width="800" height="450" >}}
 
 
 

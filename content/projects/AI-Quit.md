@@ -3,7 +3,7 @@ date: '2025-08-26T09:53:42+02:00' # date in which the content is created - defau
 title: 'AI-Quit'
 draft: false # set to "true" if you want to hide the content 
 link: "https://williamarnberg.com/articles/AI-Quit/" # optional URL to link the logo to
-slug: "ecs"
+slug: "project7"
 summary: "During our second year, I designed and implemented my own Archetype-based ECS in my own game engine."
 params:
     button:
@@ -16,4 +16,3 @@ params:
     
 ---
 
-During our second year, I designed and implemented my own Archetype-based ECS in my own game engine.
