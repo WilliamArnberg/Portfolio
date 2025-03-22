@@ -1,23 +1,17 @@
 <footer class="footer w-100">
   <div class="container">
     <div class="container-fluid">
-      <div class="row w-100 align-items-center">
-        <div class="footer_left col-12 col-lg-4 mb-3 mb-lg-0 text-center text-lg-start">
-          <div class="footer__copy">
-            <span>{{ i18n "footer_notice" | safeHTML }}</span>
-          </div>
-        </div>
-        <div class="footer_links col-12 col-lg-6 mb-3 mb-lg-0 text-center text-lg-start">
-          <ul class="navbar-nav w-100 align-items-center justify-content-center justify-content-lg-start d-flex flex-wrap gap-2">
-            <li class="nav-item">
-              <a class="nav-link px-2" href="{{ .Site.BaseURL | relLangURL }}"
-                >🏠 HOME</a
-              >
-            </li>
-            {{ range .Site.Menus.footer }}
-            <li class="nav-item">
-              <a class="nav-link px-2" href="{{ .URL | relURL }}"
-                >{{ .Name | upper }}</a
+      <div class="footer_links col-12 col-lg-6 mb-3 mb-lg-0 text-center text-lg-start">
+        <ul class="navbar-nav w-100 align-items-center justify-content-center justify-content-lg-start d-flex flex-wrap gap-2">
+          <li class="nav-item">
+            <a class="nav-link px-2" href="{{ .Site.BaseURL | relLangURL }}"
+            >🏠 HOME</a
+            >
+          </li>
+          {{ range .Site.Menus.footer }}
+          <li class="nav-item">
+            <a class="nav-link px-2" href="{{ .URL | relURL }}"
+            >{{ .Name | upper }}</a
               >
             </li>
             {{ end }}
@@ -30,18 +24,18 @@
             <nav id="footer-language-selector" class="language-selector nav-item dropdown dropup">
               {{ range .Site.Languages }} {{ if eq . $.Site.Language }}
               <button
-                type="button"
-                class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center show"
-                aria-expanded="false"
-                aria-controls="languages-dropdown"
-                aria-expanded="true"
-                data-bs-toggle="dropdown"
-                data-bs-display="static"
-                aria-label="Select language"
+              type="button"
+              class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center show"
+              aria-expanded="false"
+              aria-controls="languages-dropdown"
+              aria-expanded="true"
+              data-bs-toggle="dropdown"
+              data-bs-display="static"
+              aria-label="Select language"
               >
-                <span class="label">{{ i18n "language" }}</span>
-              </button>
-              <ul
+              <span class="label">{{ i18n "language" }}</span>
+            </button>
+            <ul
                 class="dropdown-menu dropdown-menu-end dropup"
                 id="languages-dropdown"
                 data-bs-popper="static"
@@ -52,10 +46,10 @@
                 {{ end }} {{ end }} {{ range $.Translations }}
                 <li class="dropdown-item choice">
                   <a
-                    class="translation btn-link nav-link"
-                    title="{{ .Language.LanguageName }}"
-                    href="{{ .Permalink }}"
-                    >{{ .Language.LanguageName }}</a
+                  class="translation btn-link nav-link"
+                  title="{{ .Language.LanguageName }}"
+                  href="{{ .Permalink }}"
+                  >{{ .Language.LanguageName }}</a
                   >
                 </li>
                 {{ end }}
@@ -74,41 +68,41 @@
                 data-bs-toggle="dropdown"
                 data-bs-display="static"
                 aria-label="Toggle theme (light)"
-              >
+                >
                 <span class="theme-icon auto d-none" aria-hidden="true"
-                  >{{ i18n "theme_auto_short" }}</span
+                >{{ i18n "theme_auto_short" }}</span
                 >
                 <span class="current-theme">{{ i18n "theme_auto" }}</span>
                 <span class="d-lg-none ms-2 visually-hidden" id="bd-theme-text"
-                  >{{ i18n "toggle_theme" }}</span
+                >{{ i18n "toggle_theme" }}</span
                 >
               </button>
               <ul
-                class="dropdown-menu dropdown-menu-end dropup"
-                aria-labelledby="bd-theme-text"
-                data-bs-popper="static"
+              class="dropdown-menu dropdown-menu-end dropup"
+              aria-labelledby="bd-theme-text"
+              data-bs-popper="static"
               >
-                <li>
+              <li>
                   <button
                     type="button"
                     class="dropdown-item d-flex align-items-center active"
                     data-bs-theme-value="light"
                     aria-pressed="true"
                   >
-                    {{ i18n "theme_light" }}
+                  {{ i18n "theme_light" }}
                   </button>
                 </li>
                 <li>
                   <button
-                    type="button"
-                    class="dropdown-item d-flex align-items-center"
-                    data-bs-theme-value="dark"
-                    aria-pressed="false"
+                  type="button"
+                  class="dropdown-item d-flex align-items-center"
+                  data-bs-theme-value="dark"
+                  aria-pressed="false"
                   >
-                    {{ i18n "theme_dark" }}
-                    <span class="theme-icon dark d-none" aria-hidden="true"
+                  {{ i18n "theme_dark" }}
+                  <span class="theme-icon dark d-none" aria-hidden="true"
                       >{{ i18n "theme_dark_short" }}</span
-                    >
+                      >
                   </button>
                 </li>
                 <li>
@@ -117,10 +111,10 @@
                     class="dropdown-item d-flex align-items-center"
                     data-bs-theme-value="auto"
                     aria-pressed="false"
-                  >
+                    >
                     {{ i18n "theme_auto" }}
                     <span class="theme-icon light d-none" aria-hidden="true"
-                      >{{ i18n "theme_light_short" }}</span
+                    >{{ i18n "theme_light_short" }}</span
                     >
                   </button>
                 </li>
@@ -129,6 +123,12 @@
             {{ end }}
           </div>
         </div>
+        <div class="row w-100 align-items-center">
+          <div class="footer_left col-12 col-lg-4 mb-3 mb-lg-0 text-center text-lg-start">
+            <div class="footer__copy">
+              <span>{{ i18n "footer_notice" | safeHTML }}</span>
+            </div>
+          </div>
       </div>
     </div>
   </div>

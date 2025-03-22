@@ -19,7 +19,7 @@
 
 ## Footer
 - id: "footer_notice"
-  translation: ""
+  translation: "I am part of The Game Assembly's internship program. As per the agreement between the Game Industry and The Game Assembly, <br/> neither student nor company may be in contact with one another regarding internships before April 23rd. <br/> Any internship offers can be made on May 6th, at the earliest."
 
 - id: "language"
   translation: "Language"
@@ -40,6 +40,7 @@
 
 - id: "head_description"
   translation: ""
+  
 
 ## Homepage showcase
 - id: "showcase_title"
@@ -49,7 +50,7 @@
   translation: " "
 
 - id: "showcase_description"
-  translation: "I am a Game programmer specializing in Engine and Systems development"
+  translation: "I am a Game programmer specializing in Engine and Systems development, currently looking for an internship starting August 2025."
 
 - id: "showcase_button"
   translation: "Contact"
@@ -65,11 +66,17 @@
 - id: "about_content"
   translation:  <p class="lead">
       </p>
-      Since I was young tinkering and taking things apart to figure out what makes something tick, this has grown into  
-      a drive to build long lasting solutions with security and simplicity in mind.
+      Since I was young tinkering and taking things apart to figure out what makes something tick has always been a core pillar of my personality.<br/>
+      This has grown into an neverending curiosity of exploring old and new technologies alike. <br/>
+
+      Before enrolling in The Game Assembly I was running a company (Krafton) together with my brother.<br/>
+
+      When the business failed in 2021 I decided to go after my childhood dream of becoming a game developer. <br/>
+      
+      On my free time you will find me playing or DM'ing DnD, bouldering and sportsclimbing, or going on a coding adventure.
 
       <p class="lead">
-
+ 
     </p>
 
 - id: "about_button"
@@ -157,10 +164,12 @@
   translation: "Email"
 
 - id: "contact_email_email"
-  translation: '<a href="mailto:arnberg19@gmail.com">arnberg19@gmail.com</a>'
+  translation: '<a href="mailto:arnberg19@gmail.com">arnberg19@gmail.com</a> '
+  
 
 - id: "contact_button"
   translation: "Send Message"
+
 
 ## Blog
 - id: "read_more"

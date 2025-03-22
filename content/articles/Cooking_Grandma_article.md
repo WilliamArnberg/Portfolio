@@ -10,7 +10,7 @@ The game jam was held over a 3-day period, and I am very proud of the project an
 The theme of the game jam was ***Combination***.
 The game won **Best-Narrative** and the **Students Choice** awards.
 
-You play as a Chef who is running a diner in a busy part of town, the chef is serving a most unusual customer.  
+You play as a Chef who is running a diner in a busy part of town, the chef is serving a most unusual customer. <br/>
 
 ##### The Diner
 {{< video src="/videos/Cooking_Intro.mp4" autoplay="true" loop="true" width="800" height="450" >}}  
