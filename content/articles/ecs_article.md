@@ -1,8 +1,8 @@
 ---
 date: '2024-08-26T09:53:42+02:00' # date in which the content is created - defaults to "today"
-title: 'Entity-Component-System (WIP)'
+title: 'Entity-Component-System '
 draft: false # set to "true" if you want to hide the content 
-summary: "During our second year, I designed and implemented my own Archetype-based ECS in my own game engine."
+summary: "During my second year, I designed and implemented my own Archetype-based ECS in my groups custom game engine made from scratch."
 ---
 
 At the beginning of our second year at ***The Game Assembly*** we get the opportunity to build our own game engines,
@@ -187,6 +187,7 @@ The demo is currently running with an algorithmic complexity of O(n^2) where eac
 
 
 #### Other Projects built using the ECS
+
 
 
 

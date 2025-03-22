@@ -4,7 +4,7 @@ title: 'Entity-Component-System'
 draft: false # set to "true" if you want to hide the content 
 link: "https://williamarnberg.com/articles/ecs_article/" # optional URL to link the logo to
 slug: "ecs"
-summary: "During our second year, I designed and implemented my own Archetype-based ECS in my own game engine."
+summary: "Archetype-based Entity-Component-System,with Queries, Filtered-Queries, Systems, staging and more."
 params:
     button:
         icon: "icon-arrow-right"
@@ -16,5 +16,5 @@ params:
     
 ---
 
-During our second year, I designed and implemented my own Archetype-based ECS in my own game engine.
+Archetype-based Entity-Component-System,with Queries, Filtered-Queries, Systems, staging and more.
 

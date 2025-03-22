@@ -88,10 +88,14 @@
 
 ## Homepage experience
 - id: "experience_title"
-  translation: "Experience"
+  translation: "Work Experience"
 
 - id: "experience_description"
-  translation: ""
+  translation:  
+    "Over my professional life, I have constructed,
+     managed and designed apartments,offices, labs and schools.     
+     "
+   
 
 - id: "experience_button"
   translation: "LinkedIn" 

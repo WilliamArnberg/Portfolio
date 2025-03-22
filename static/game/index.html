@@ -23,8 +23,8 @@
         border: 0px none;
         background-color: black;
         display: block;
-        width: 50%; /* Make canvas fill the width */
-        height: 50%; /* Make canvas fill the height */
+        width: 100%; /* Make canvas fill the width */
+        height: 100%; /* Make canvas fill the height */
       }
     </style>
   </head>
@@ -34,14 +34,9 @@
     <script type='text/javascript'>
       var canvasElement = document.getElementById('canvas');
 
-      function resizeCanvas() {
-        canvasElement.width = window.innerWidth;
-        canvasElement.height = window.innerHeight;
-      }
-
-      window.addEventListener('resize', resizeCanvas);
-      resizeCanvas(); // Ensure correct size on load
-
+      // As a default initial behavior, pop up an alert when webgl context is lost. To make your
+      // application robust, you may want to override this behavior before shipping!
+      // See http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.15.2
       canvasElement.addEventListener('webglcontextlost', (e) => {
         alert('WebGL context lost. You will need to reload the page.');
         e.preventDefault();
@@ -51,7 +46,6 @@
         canvas: canvasElement,
       };
     </script>
-    
     <script async type="text/javascript" src="my_target.js"></script>
   </body>
 </html>

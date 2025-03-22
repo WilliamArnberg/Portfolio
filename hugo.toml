@@ -60,7 +60,7 @@ theme = "adritian-free-hugo-theme"
         weight = 3
 
         [[languages.en.menus.header]]
-        name = "Experience"
+        name = "Work Experience"
         URL = "#experience"
         weight = 4
 
