@@ -5,6 +5,11 @@ draft: false # set to "true" if you want to hide the content
 summary: "Gamejam"
 
 ---
+The game jam was held over a 3-day period, and I am very proud of the project and what me and my other team-mates achieved in such a small amount of time.
+
+The theme of the game jam was ***Combination***.
+The game won **Best-Narrative** and the **Students Choice** awards.
+
 You play as a Chef who is running a diner in a busy part of town, the chef is serving a most unusual customer.  
 
 ##### The Diner

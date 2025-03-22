@@ -29,5 +29,12 @@
       <guid>http://localhost:1313/projects/ecs/</guid>
       <description>During our second year, I designed and implemented my own Archetype-based ECS in my own game engine.</description>
     </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/projects/ai-quit/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/ai-quit/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

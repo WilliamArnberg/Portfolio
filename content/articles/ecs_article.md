@@ -162,11 +162,33 @@ Removing a system puts it into a queue where it will get removed from the System
 
 Pipelining the systems empowers every decision about the data we are operating on as we can for a fact know in what state each data is at every point of execution in our codebase.
 
+
+#### Staging
+Staging allows asynchronous management and execution of code. 
+A stage is a new world, however this world may at any point be merged with another to resume execution in the original.
+This allows for example level streaming where levels and/or parts of the current level may be loaded asynchronously, code and anything else may be executed on the stage as it is essentially just another World.
+````cpp
+
+SceneManager sceneManager; /example code
+World.CreateStage("SomeStage"); 
+
+sceneManager.loadScene();
+Stage* stage = World.GetStage("SomeStage");
+stage->Merge();
+
+````
+
+
 #### Demo
 Demo compiled using Emscripten and Raylib, running a simulation of Boids using a Data-oriented approach with the Entity-Component-System
 The demo is currently running with an algorithmic complexity of O(n^2) where each boid have is testing against every other boid in the simulation.  
 
 {{< wasm_game >}}
+
+
+#### Other Projects built using the ECS
+
+
 
 ###### References
 <https://ajmmertens.medium.com/>  

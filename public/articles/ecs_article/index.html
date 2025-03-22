@@ -244,12 +244,24 @@ For instance say that you want to stream a level, you want to destroy all entiti
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>World.RemoveSystem(<span style="color:#e6db74">&#34;Move Entity&#34;</span>,ecs<span style="color:#f92672">::</span>Pipeline<span style="color:#f92672">::</span>OnUpdate);
 </span></span></code></pre></div><p>Removing a system puts it into a queue where it will get removed from the SystemManager at the end of the frame.</p>
 <p>Pipelining the systems empowers every decision about the data we are operating on as we can for a fact know in what state each data is at every point of execution in our codebase.</p>
-<h4 id="demo">Demo</h4>
+<h4 id="staging">Staging</h4>
+<p>Staging allows asynchronous management and execution of code.
+A stage is a new world, however this world may at any point be merged with another to resume execution in the original.
+This allows for example level streaming where levels and/or parts of the current level may be loaded asynchronously, code and anything else may be executed on the stage as it is essentially just another World.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SceneManager sceneManager; <span style="color:#f92672">/</span>example code
+</span></span><span style="display:flex;"><span>World.CreateStage(<span style="color:#e6db74">&#34;SomeStage&#34;</span>); 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sceneManager.loadScene();
+</span></span><span style="display:flex;"><span>Stage<span style="color:#f92672">*</span> stage <span style="color:#f92672">=</span> World.GetStage(<span style="color:#e6db74">&#34;SomeStage&#34;</span>);
+</span></span><span style="display:flex;"><span>stage<span style="color:#f92672">-&gt;</span>Merge();
+</span></span></code></pre></div><h4 id="demo">Demo</h4>
 <p>Demo compiled using Emscripten and Raylib, running a simulation of Boids using a Data-oriented approach with the Entity-Component-System
 The demo is currently running with an algorithmic complexity of O(n^2) where each boid have is testing against every other boid in the simulation.</p>
 <div id="wasm-game-container">
     <iframe src="https://williamarnberg.com/game/index.html" width="800" height="600" style="border: none;"></iframe>
 </div>
+<h4 id="other-projects-built-using-the-ecs">Other Projects built using the ECS</h4>
 <h6 id="references">References</h6>
 <p><a href="https://ajmmertens.medium.com/">https://ajmmertens.medium.com/</a><br>
 <a href="https://research.swtch.com/sparse">https://research.swtch.com/sparse</a></p>
