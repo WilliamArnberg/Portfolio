@@ -1,7 +1,6 @@
 {{/* Used for the Client&Works section in the homepage */}}
 {{/* If some content is missing/not displayed, check the images for the client/work */}}
 
-
 {{ if .Site.Data.homepage.client_and_work.enable }}
 <section id="portfolio" class="section section--border-bottom">
   <div class="container client-works-container">
@@ -17,29 +16,33 @@
           <div class="clients__item">
             <a href="{{ .Params.link }}" aria-label="Link to the client site for {{ .Params.title }} (opens in a new window)" target="_blank">
               
-              {{ $img := resources.Get .Params.logo.x }}
-              {{ $img2x := resources.Get .Params.logo._2x }}
-              {{ with $img }}
-              {{ with $img2x}}
-              
-              {{/* ⚠️ If the image is not found, it will not be displayed - this whole block will be skipped */}} 
+              {{ $img := .Params.logo.x }}
+              {{ $img2x := .Params.logo._2x }}
 
-                {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
-                {{ $img2xWebp := $img2x.Resize (printf "%dx%d webp q75 Lanczos picture" $img2x.Width $img2x.Height) }}
-              
-                <picture class="picture clients">
-                  <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $img2xWebp.RelPermalink }} 2x" type="image/webp" />
-                  <source srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x" type="image/webp">
-                  <img
-                    class="portfolio-project img-responsive"
-                    src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
-                    srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-                    data-src="{{ $img.RelPermalink }}"
-                    data-srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-                    alt="{{ .Params.title }}"
-                  />
-                </picture>
-              {{ end }}
+              {{ if or (hasSuffix $img ".gif") (hasSuffix $img2x ".gif") }}
+                <img class="portfolio-project img-responsive"
+                     src="{{ $img | absURL }}"
+                     alt="{{ .Params.title }}">
+              {{ else }}
+                {{ $imgRes := resources.Get $img }}
+                {{ $img2xRes := resources.Get $img2x }}
+                {{ with $imgRes }}
+                {{ with $img2xRes }}
+                  
+                  {{ $imgWebp := $imgRes.Resize (printf "%dx%d webp q75 Lanczos picture" $imgRes.Width $imgRes.Height) }}
+                  {{ $img2xWebp := $img2xRes.Resize (printf "%dx%d webp q75 Lanczos picture" $img2xRes.Width $img2xRes.Height) }}
+
+                  <picture class="picture clients">
+                    <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $img2xWebp.RelPermalink }} 2x" type="image/webp" />
+                    <source srcset="{{ $imgRes.RelPermalink }} 1x, {{ $img2xRes.RelPermalink }} 2x">
+                    <img class="portfolio-project img-responsive"
+                         src="{{ $imgRes.RelPermalink }}"
+                         srcset="{{ $imgRes.RelPermalink }} 1x, {{ $img2xRes.RelPermalink }} 2x"
+                         alt="{{ .Params.title }}">
+                  </picture>
+
+                {{ end }}
+                {{ end }}
               {{ end }}
 
             </a>
@@ -48,6 +51,7 @@
         </div>
       </div>
     </div>
+
     {{/* Projects */}}
     {{ $projects := (where .Site.RegularPages.ByDate.Reverse "Type" "projects") }}          
     {{ range $index, $element := $projects }}
@@ -69,50 +73,62 @@
       </div>
       <div class="col-12 col-md-7 pl-md-0 text-right">
 
-        {{ $img := resources.Get .Params.image.x }}
-        {{ $img2x := resources.Get .Params.image._2x }}
-        {{ with $img }}
-        {{ with $img2x}}
-        {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
-        {{ $img2xWebp := $img2x.Resize (printf "%dx%d webp q75 Lanczos picture" $img2x.Width $img2x.Height) }}
-        <picture class="picture-works even">
-          <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $img2xWebp.RelPermalink }} 2x" type="image/webp" />
-          <source srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x" type="image/webp">
-          <img
-            class="lozad img-responsive"
-            src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
-            srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-            data-src="{{ $img.RelPermalink }}"
-            data-srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-            alt="{{ .Params.title }}"
-          />
-        </picture>
-        {{ end }}
+        {{ $img := .Params.image.x }}
+        {{ $img2x := .Params.image._2x }}
+
+        {{ if or (hasSuffix $img ".gif") (hasSuffix $img2x ".gif") }}
+          <img class="lozad img-responsive"
+               src="{{ $img | absURL }}"
+               alt="{{ .Params.title }}">
+        {{ else }}
+          {{ $imgRes := resources.Get $img }}
+          {{ $img2xRes := resources.Get $img2x }}
+          {{ with $imgRes }}
+          {{ with $img2xRes }}
+            {{ $imgWebp := $imgRes.Resize (printf "%dx%d webp q75 Lanczos picture" $imgRes.Width $imgRes.Height) }}
+            {{ $img2xWebp := $img2xRes.Resize (printf "%dx%d webp q75 Lanczos picture" $img2xRes.Width $img2xRes.Height) }}
+            <picture class="picture-works even">
+              <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $img2xWebp.RelPermalink }} 2x" type="image/webp" />
+              <source srcset="{{ $imgRes.RelPermalink }} 1x, {{ $img2xRes.RelPermalink }} 2x">
+              <img class="lozad img-responsive"
+                   src="{{ $imgRes.RelPermalink }}"
+                   srcset="{{ $imgRes.RelPermalink }} 1x, {{ $img2xRes.RelPermalink }} 2x"
+                   alt="{{ .Params.title }}">
+            </picture>
+          {{ end }}
+          {{ end }}
         {{ end }}
 
       </div>
       {{ else }}
       <div class="col-12 col-md-7 pl-md-0 text-right not-even">
-        {{ $img := resources.Get .Params.image.x }}
-        {{ $img2x := resources.Get .Params.image._2x }}
-        {{ with $img }}
-        {{ with $img2x}}
-        {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
-        {{ $img2xWebp := $img2x.Resize (printf "%dx%d webp q75 Lanczos picture" $img2x.Width $img2x.Height) }}
-        <picture class="picture-works odd">
-          <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $img2xWebp.RelPermalink }} 2x" type="image/webp" />
-          <source srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x" type="image/webp">
-          <img
-            class="lozad img-responsive"
-            src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
-            srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-            data-src="{{ $img.RelPermalink }}"
-            data-srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-            alt="{{ .Params.title }}"
-          />
-        </picture>
+        
+        {{ $img := .Params.image.x }}
+        {{ $img2x := .Params.image._2x }}
+
+        {{ if or (hasSuffix $img ".gif") (hasSuffix $img2x ".gif") }}
+          <img class="lozad img-responsive"
+               src="{{ $img | absURL }}"
+               alt="{{ .Params.title }}">
+        {{ else }}
+          {{ $imgRes := resources.Get $img }}
+          {{ $img2xRes := resources.Get $img2x }}
+          {{ with $imgRes }}
+          {{ with $img2xRes }}
+            {{ $imgWebp := $imgRes.Resize (printf "%dx%d webp q75 Lanczos picture" $imgRes.Width $imgRes.Height) }}
+            {{ $img2xWebp := $img2xRes.Resize (printf "%dx%d webp q75 Lanczos picture" $img2xRes.Width $img2xRes.Height) }}
+            <picture class="picture-works odd">
+              <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $img2xWebp.RelPermalink }} 2x" type="image/webp" />
+              <source srcset="{{ $imgRes.RelPermalink }} 1x, {{ $img2xRes.RelPermalink }} 2x">
+              <img class="lozad img-responsive"
+                   src="{{ $imgRes.RelPermalink }}"
+                   srcset="{{ $imgRes.RelPermalink }} 1x, {{ $img2xRes.RelPermalink }} 2x"
+                   alt="{{ .Params.title }}">
+            </picture>
+          {{ end }}
+          {{ end }}
         {{ end }}
-        {{ end }}
+        
       </div>
       <div class="col-12 col-md-5 mt-4 mt-md-0 my-md-auto">
         <h3>{{ .Params.title }}</h3>

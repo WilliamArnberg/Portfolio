@@ -91,7 +91,7 @@ With the largest value found, it is now possible to extract the smallest three c
 
 ![image](images/network/smallestThreeQuantize.png)
 
-For the quantization we need to take the floating point value and get it into a format that we can serialize to a uint32_t which consists of 4 bytes or 32 bits.
+For the quantization we need to take the floating point value and get it into a format that we can serialize to a ```uint32_t``` which consists of 4 bytes or 32 bits.
 
 The data that have to be stored is the index of the largest component (2 bits), that leaves 9 bits for each remaining component.
 9 bits gives us $2^9 = 511$.   

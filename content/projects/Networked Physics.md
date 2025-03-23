@@ -11,8 +11,8 @@ params:
         btnText: "Read More"
         URL: "https://williamarnberg.com/articles/networked_physics_article/"
     image:  
-        x: "static/gifs/network_intro.gif"
-        _2x: "static/gifs/network_intro.gif"
+        x: "gifs/network_intro.gif"
+        _2x: "gifs/network_intro.gif"
        
 ---
 

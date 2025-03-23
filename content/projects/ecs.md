@@ -11,8 +11,8 @@ params:
         btnText: "Read More"
         URL: "https://williamarnberg.com/articles/ecs_article/"
     image:  
-        x: "images/ecs/demo.png"
-        _2x: "images/ecs/demo.png"
+        x: "gifs/ecs_Boids.gif"
+        _2x: "gifs/ecs_Boids.gif"
     
 ---
 
