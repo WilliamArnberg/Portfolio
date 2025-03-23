@@ -11,8 +11,8 @@ params:
         btnText: "Read More"
         URL: "https://williamarnberg.com/articles/cooking_grandma_article/"
     image:  
-        x: "images/showcase/cooking.png"
-        _2x: "images/showcase/cooking.png"
+        x: "gifs/cookingIntro.gif"
+        _2x: "gifs/cookingIntro.gif"
     
 
 ---
