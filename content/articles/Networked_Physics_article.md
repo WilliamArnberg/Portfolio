@@ -5,7 +5,9 @@ draft: false # set to "true" if you want to hide the content
 summary: "Networking a physics simulation with custom client & server and compression techniques"
     
 ---
-Custom Client and Server architecture for physics simulation
+Custom Client and Server architecture for physics simulation, built using custom game engine Tonic.  
+
+
 
 {{< video src="/videos/net.mp4" autoplay="false" loop="true" width="800" height="450" >}}  
 

@@ -5,6 +5,7 @@ draft: false # set to "true" if you want to hide the content
 summary: "Gamejam"
 
 ---
+A student led Game Jam of 5 students  
 The game jam was held over a 3-day period, and I am very proud of the project and what me and my other team-mates achieved in such a small amount of time.
 
 The theme of the game jam was ***Combination***.
@@ -25,9 +26,12 @@ You play as a Chef who is running a diner in a busy part of town, the chef is se
 ##### Fullfill his requests!
 {{< video src="/videos/fullfillHisRequests.mp4" autoplay="false" loop="true" width="800" height="450" >}}
 
+##### Satiate his hunger!
+{{< video src="/videos/ending.mp4" autoplay="false" loop="true" width="800" height="450" >}}
 
 
-A student led Game Jam of 5 students  
+
+
 ##### Programmers: 
 William Arnberg  
 Gustaf Engsner  
