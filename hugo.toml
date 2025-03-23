@@ -126,3 +126,14 @@ theme = "adritian-free-hugo-theme"
 
 
 ## by default we allow override AND automatic selection
+
+
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    codeFences = true
+  [markup.math]
+    enable = true

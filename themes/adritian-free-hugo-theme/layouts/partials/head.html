@@ -94,5 +94,16 @@
 <!-- no google tag displayed -->
 {{- end }}
 <script src='{{ "js/library/lozad.min.js" | absURL }}'></script>
-
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    svg: { scale: 1.2 }
+  };
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+</script>
 {{ template "_internal/opengraph.html" . }}
