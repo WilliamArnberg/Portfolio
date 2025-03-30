@@ -52,7 +52,7 @@ inline T Quantize(float aVal, float aMin, float aMax)
 Let's run an example with the value being quantized as $42.78$ and we want to map it to a ``uint_8t`` </br>
 ```nLevels``` is the total number of discrete values in the quantized range, e.g $2^8 = 256$.  
 ``upperBound`` the upperbound to ensure overflow does not happen. </br>
-```scale``` maps the floating point range ```[aMin,aMax]``` to the upperBound, e.g assuming ```aMin``` and ``aMax`` are $-128$ and $128$.</br>
+```scale``` defines how much each integer step represents in he original floating point rage. e.g assuming ```aMin``` and ``aMax`` are $-128$ and $128$.</br>
 $scale = \frac{128 - (-128)} { (256 - 1)} ≈  1.00392$   
 This will result in a fairly lossy quantization as each step will cover approximately$~1.004$ steps.</br>
 The input ``aMin`` and ``aMax`` values directly maps to the level of precision the quantization will have. </br>
