@@ -5,12 +5,6 @@ draft: false # set to "true" if you want to hide the content
 summary: "Networking a physics simulation with custom client & server and compression techniques"
     
 ---
-Custom Client and Server architecture for physics simulation, built using custom game engine Tonic.  
-
-
-
-{{< video src="/videos/net.mp4" autoplay="false" loop="true" width="800" height="450" >}}  
-
 # Data Quantization
 
 In order to transfer large amounts of data between networks or even between CPU and GPU techniques called Data Quantization is employed. 
@@ -117,16 +111,21 @@ This means that if the component with the largest absolute value is negative, th
 
 With the largest value found, it is now possible to extract the smallest three components and begin quantizing them.
 
+With the goal of squishing all this data into a smaller format that we can serialize to a ```uint32_t``` which consists of 4 bytes or 32 bits, consider the amount of data needed per component.
+
 ![image](images/network/smallestThreeQuantize.png)
 
-For the quantization we need to take the floating point value and get it into a format that we can serialize to a ```uint32_t``` which consists of 4 bytes or 32 bits.
 
 The data that have to be stored is the index of the largest component (2 bits), that leaves 9 bits for each remaining component.
 9 bits gives us $2^9 = 512$.   
 Therefor the integer range we can encode each component to is $[0,511]$.  
-Another aspect of the quaternion is that since we are subsituting the largest value the remaining values will be within a range of $[-1/\sqrt{2}) , 1/\sqrt{2}]$.
-Because the magnitude is 1 we can derive this from the fact that if the largest value a component can take is $v = 1$. The second largest is if two components have the same absolute value $v^2 + v^2 = 1$ or $2v^2 = 1$.  
-There for with a little substitution we can see that $v = 1 / \sqrt{2}$.  
+
+Because the magnitude is 1 we can derive this from the fact that if the largest value a component can take is $v = 1$. The second largest is if two components have the same absolute value $\sqrt{v^2 + v^2} = \sqrt{2v^2}  = \sqrt{2\frac{1}{2}} = \sqrt{1} = 1$.  
+
+This is proof of the ```min``` and ```max``` range for the quantization to achieve as much precision as possible.
+The range the quantization will encode into is $[-\sqrt{\frac{1}{2}},\sqrt{\frac{1}{2}} ]$
+
+
 This is useful because we may now have a larger precision since we are not encoding in $[-1,1]$.
 
 All that is left of the Compression step now is to shift the values into a ```uint32_t``` by bitmasking and left shifting.
@@ -145,14 +144,39 @@ All that is left now is to take the combined sum of the largest components and r
 
 ![image](images/network/reconstruct.png)
 
- # Messages, packets and buffers
-To be able to send messages across networks we need to be able to serialize and deserialize data.
-For that we need a base message class
+
+
+### Compressing Velocity
+
+
+### Compressing Position
+Position is compressed by taking the difference in position from frame $A$ to frame $B$, compressing that value with zero-point compression and then creating a system on reciever side that says that frame $B$ is relative to frame $A$.
+
+Maximum positional change must also be taken into account when considering the range that you may compress within.
+
+
+### Result
+![image](images/network/quantizedState.png)
+
+
+
+
+
+### Other optimizations
+The easiest one, do not send what is not needed. </br>
+If a cube have not moved in this frame do not send it, and on the recieving end just keep the object at the last known place.
+
+
+
+# Test Case
+### Messages, packets and buffers
+To be able to send messages across networks I needed to be able to serialize and deserialize data.
+For that we need a base message class.
  
  ![image](images/network/NetMessage.jpg)
 
 
- Each message consists of a message header that explicitly states what type the message is and the messageLength.
+ Each message consists of a message header that explicitly states what ``type`` the message is and the ``messageLength``, the type here is a ``enum``.  
  The message class overloads the out and in stream operators so we can write data and read data from the message.
 
  We are going to be constructing multiple messages per update, and each frame we will send one state update so we need to be able to pack each individual message into a packet.
@@ -161,12 +185,12 @@ For that we need a base message class
   
 
 Each packet gets filled with as many messages as we can write each frame.
-The packet header tells us which sequence number the packet is part of.
+The packet header tells us which sequence number the packet is part of.</br>
 Sequence number here doubles as the tick count.
 
 The header also specifies a packet ack from the sender side, so that when a reciever recieves a packet it can see the most recent acked packet from the ack, and from that ack read the the ackField which is a bitfield consisiting of (ack - 32) last acks. e.g ack 100 means ackfield would consist of acks for packet 68 - 100.
 
-This redundancy makes it so that we dont constantly have to worry about acks gettings lost.
+This redundancy adds an extra layer of protection to acks gettings lost, for a relatively small price of 4 bytes.
 
 When sending and recieving packages they get placed into sequence buffers 
 The sequence buffer is a circular buffer giving us a fast and efficient way of storing data.
@@ -185,10 +209,8 @@ Each frame before sending a packet the sequence buffer constructs the package ac
 When state is recieved it is placed into a jitter buffer, and it will wait for 5 frames before applying the state to the simulation to avoid jitter.
 The amount of time to wait would ideally be a calculation made with respect to latency.
 
-The state being sent is 
 
-
-
+{{< video src="/videos/net.mp4" autoplay="false" loop="true" width="800" height="450" >}}  
 
 
 
