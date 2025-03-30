@@ -211,6 +211,7 @@
       "components",
       "compressed-state",
       "compressing-position",
+      "compressing-position-and-velocity",
       "compressing-the-quaternion",
       "compressing-velocity",
       "contact",

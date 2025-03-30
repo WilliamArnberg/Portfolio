@@ -7,7 +7,7 @@ summary: "Networking a physics simulation with custom client & server and compre
 ---
 # Data Quantization
 
-In order to transfer large amounts of data between networks or even between CPU and GPU techniques called Data Quantization is employed. 
+In order to transfer large amounts of data between networks or even between CPU and GPU techniques called Data Quantization are employed. 
 By analyzing the data and making careful approximations the data may be compressed into a smaller state.  
 
 In this case I will take a look at a networking scenario where I will reduce the required bandwidth of a networked-physics simulation.
@@ -42,8 +42,8 @@ inline T Quantize(float aVal, float aMin, float aMax)
 	constexpr uint32_t nLevels = (1u << bits);
     constexpr uint32_t upperBound = nLevels - 1;
 	float scale = (aMax - aMin) / upperBound; 
-	int zeroPoint = static_cast<int>(std::round(aMin / scale)); 
-	float x = std::round(aVal / scale) - zeroPoint;
+	int zeroPoint = static_cast<int>(std::round(-aMin / scale)); 
+	float x = std::round(aVal / scale) + zeroPoint;
 	T xQ = static_cast<T>(std::clamp(static_cast<int>(x), 0, static_cast<int>(upperBound)));
 
 	return xQ;
@@ -58,14 +58,14 @@ This will result in a fairly lossy quantization as each step will cover approxim
 The input ``aMin`` and ``aMax`` values directly maps to the level of precision the quantization will have. </br>
 
 `` zeroPoint`` shifts the quantization in order to preserve the ``aMin`` value.  
-$zeroPoint = round(\frac{-128} { 1.00392}) ≈ -128$ 
+$zeroPoint = round(\frac{-(-128)} { 1.00392}) ≈ 128$ 
 
 ``x`` becomes scaled and then shifted by the ``zeroPoint`` value to center it in the range.  </br>
-$x = round(\frac {42.78} {1.00392}) - (-128) ≈ 171$
+$x = round(\frac {42.78} {1.00392}) + (128) ≈ 171$
 
 ``xQ`` is our final quantized value, we clamp it to the max range and return it. </br>
 $xQ = 171$ </br>
-Regarding how lossy the quantization becomes, it is important to reason about the data that is being quantized. There is no one solution fits all, reason about the data find a range that fits the accepted precision level of the application.
+Regarding how lossy the quantization becomes, it is important to reason about the data that is being quantized. There is no one solution fits all, one should reason about the data and find a range that fits the accepted precision level of the application.
 
 ```cpp
 template<typename T, uint32_t bits>
@@ -74,15 +74,15 @@ inline float Dequantize(T aVal, float aMin, float aMax)
     constexpr uint32_t nLevels = (1u << bits);
     constexpr uint32_t upperBound = nLevels - 1;
 	float scale = (aMax - aMin) / (upperBound);
-	int zeroPoint = static_cast<int>(std::round(aMin / scale));
-	float xF = (static_cast<int>(aVal) + zeroPoint) * scale;
+	int zeroPoint = static_cast<int>(std::round(-aMin / scale));
+	float xF = (static_cast<int>(aVal) - zeroPoint) * scale;
 
 	return xF;
 }
 ```
-Dequantifying is achieved by remodeling a little bit in our formula, but remains mostly the same
+Dequantization is achieved by rearranging our formula, while keeping it mostly the same.
 
-$ xF =  (171 + (-128)) *  1.00392 ≈ 43.16856$
+$ xF =  (171 - (128)) *  1.00392 ≈ 43.16856$
 
 The data lost is equal to </br>
 
@@ -109,7 +109,7 @@ This means that if the component with the largest absolute value is negative, th
 
 ![image](images/network/largestValueNegate.png)
 
-With the largest value found, it is now possible to extract the smallest three components and begin quantizing them.
+With the largest value found, it is now possible to extract the three smallest components and begin quantizing them.
 
 With the goal of squishing all this data into a smaller format that we can serialize to a ```uint32_t``` which consists of 4 bytes or 32 bits, consider the amount of data needed per component.
 
@@ -124,7 +124,7 @@ Because the magnitude is 1 we can derive this from the fact that if the largest 
 
 This is proof of the ```min``` and ```max``` range for the quantization to achieve as much precision as possible.
 The range the quantization will encode into is $[-\sqrt{\frac{1}{2}},\sqrt{\frac{1}{2}} ]$
-
+This results in a precision of 
 
 This is useful because we may now have a larger precision since we are not encoding in $[-1,1]$.
 
@@ -136,7 +136,7 @@ All that is left of the Compression step now is to shift the values into a ```ui
 
 On the recieving end we will now decompress the ```uint32_t compressed.data``` back into the original value with a slight precision loss.
 
-Starting with shifting out the data and dequantizing it, the data is now in a state which where we can begin to reconstruct the missing component.
+Starting with shifting out the data and dequantizing it, the data is now in a state where we can begin to reconstruct the missing component.
 
 ![image](images/network/outShift.png)
 
@@ -145,26 +145,23 @@ All that is left now is to take the combined sum of the largest components and r
 ![image](images/network/reconstruct.png)
 
 
+### Compressing Position and Velocity
+Position and velocity is compressed by taking the difference from frame $A$ to frame $B$, compressing that value with zero-point compression and then creating a system on reciever side that says that frame $B$ is relative to frame $A$.
 
-### Compressing Velocity
+Maximum change must also be taken into account when considering the range that you may compress within.
 
-
-### Compressing Position
-Position is compressed by taking the difference in position from frame $A$ to frame $B$, compressing that value with zero-point compression and then creating a system on reciever side that says that frame $B$ is relative to frame $A$.
-
-Maximum positional change must also be taken into account when considering the range that you may compress within.
+If you need to do teleportation or larger positional changes, reconsider the approach taken or add the ability to send full uncompressed position occasionally.
 
 
 ### Result
-![image](images/network/quantizedState.png)
-
-
-
+Original: 64 bytes -> Quantized 20 bytes final reduction of (68.75%). </br>
+![image](images/network/QuantizedState.png)
 
 
 ### Other optimizations
 The easiest one, do not send what is not needed. </br>
-If a cube have not moved in this frame do not send it, and on the recieving end just keep the object at the last known place.
+If a cube has not moved in this frame do not send it.  
+On the recieving end just keep the object at the last known place.
 
 
 
@@ -188,7 +185,8 @@ Each packet gets filled with as many messages as we can write each frame.
 The packet header tells us which sequence number the packet is part of.</br>
 Sequence number here doubles as the tick count.
 
-The header also specifies a packet ack from the sender side, so that when a reciever recieves a packet it can see the most recent acked packet from the ack, and from that ack read the the ackField which is a bitfield consisiting of (ack - 32) last acks. e.g ack 100 means ackfield would consist of acks for packet 68 - 100.
+The header also specifies a specific acked message and a ackfield.
+The ack is the most recent acked message, and the ackfield contains the most recent 32 acked messages.
 
 This redundancy adds an extra layer of protection to acks gettings lost, for a relatively small price of 4 bytes.
 
@@ -206,9 +204,8 @@ Each frame before sending a packet the sequence buffer constructs the package ac
  
 # Inserting and Applying state
 
-When state is recieved it is placed into a jitter buffer, and it will wait for 5 frames before applying the state to the simulation to avoid jitter.
+When state is recieved it is placed into a jitter buffer, and will be held for approximately 5 frames before applying the state to the simulation to avoid jitter.
 The amount of time to wait would ideally be a calculation made with respect to latency.
-
 
 {{< video src="/videos/net.mp4" autoplay="false" loop="true" width="800" height="450" >}}  
 
