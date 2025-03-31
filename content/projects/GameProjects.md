@@ -1,9 +1,10 @@
 ---
-date: '2025-08-26T09:53:42+02:00' # date in which the content is created - defaults to "today"
+date: '2024-02-26T09:53:42+02:00' # date in which the content is created - defaults to "today"
 title: 'Game Projects'
 draft: false # set to "true" if you want to hide the content 
 link: "https://williamarnberg.com/articles/Game_Projects/" # optional URL to link the logo to
 slug: "TGA_Projects"
+type: "client-work"
 summary: "Game Projects."
 params:
     button:
@@ -16,5 +17,5 @@ params:
     
 ---
 
-
+Game Projects from The Game Assembly
 

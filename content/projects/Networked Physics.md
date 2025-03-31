@@ -4,6 +4,7 @@ title: 'Data-Quantization and Networking (WIP)'
 draft: false # set to "true" if you want to hide the content 
 link: "https://williamarnberg.com/articles/networked_physics_article/" # optional URL to link the logo to
 slug: "ecs"
+
 summary: ""
 params:
     button:
