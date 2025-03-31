@@ -54,8 +54,7 @@ Let's run an example with the value being quantized as $42.78$ and we want to ma
 ``upperBound`` the upperbound to ensure overflow does not happen. </br>
 ```scale``` defines how much each integer step represents in he original floating point rage. e.g assuming ```aMin``` and ``aMax`` are $-128$ and $128$.</br>
 $scale = \frac{128 - (-128)} { (256 - 1)} ≈  1.00392$   
-This will result in a fairly lossy quantization as each step will cover approximately$~1.004$ steps.</br>
-The input ``aMin`` and ``aMax`` values directly maps to the level of precision the quantization will have. </br>
+This will result in a fairly lossy quantization where the worst-case rounding approximately $0.50196$ pe</br>
 
 `` zeroPoint`` shifts the quantization in order to preserve the ``aMin`` value.  
 $zeroPoint = round(\frac{-(-128)} { 1.00392}) ≈ 128$ 
@@ -124,10 +123,17 @@ Because the magnitude is 1 we can derive this from the fact that if the largest 
 
 This is proof of the ```min``` and ```max``` range for the quantization to achieve as much precision as possible.
 The range the quantization will encode into is $[-\sqrt{\frac{1}{2}},\sqrt{\frac{1}{2}} ]$  
-This results in a precision of approximately 
- 
-This is useful because we may now have a larger precision since we are not encoding in $[-1,1]$.
 
+This is useful because it is now encoded in a larger precision since we are not encoding in $[-1,1]$.
+
+In order to determine what the worst-case precision is we calculate it from the scale
+$maximumPrecisionLoss = \frac{scale}{2}$
+
+Remembering from the quantization function the scale was calculated like this.
+
+$scale = \frac{max - min}{upperBound} = \frac{\sqrt(\frac{1}{2}) -\(-\sqrt(\frac{1}{2}))}{2^9 -1} = \frac{1.414}{511} = 0,0027 $ </br>
+This gives a total worst-case precision loss of </br> 
+$\frac{0,0027}{2} = 0,00138 $ </br>
 All that is left of the Compression step now is to shift the values into a ```uint32_t``` by bitmasking and left shifting.
 
 ![image](images/network/shift.png)
