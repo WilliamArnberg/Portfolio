@@ -27,7 +27,7 @@ You play as a Chef who is running a diner in a busy part of town, the chef is se
 {{< video src="/videos/fullfillHisRequests.mp4" autoplay="false" loop="true" width="800" height="450" >}}
 
 ##### Satiate his hunger!
-{{< video src="/videos/ending.mp4" autoplay="false" loop="true" width="800" height="450" >}}
+{{< video src="/videos/ending.mp4" autoplay="false" loop="false" width="800" height="450" >}}
 
 
 
