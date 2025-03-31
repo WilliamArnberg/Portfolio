@@ -153,8 +153,6 @@ World.system("Move Entity",[]()
 //Systems can be removed
 World.RemoveSystem("Move Entity",ecs::Pipeline::OnUpdate);
 
-
-
 ```
 
 Removing a system puts it into a queue where it will get removed from the SystemManager at the end of the frame.
@@ -177,6 +175,14 @@ Stage* stage = World.GetStage("SomeStage");
 stage->Merge();
 
 ````
+Here is an implementation of this I made in one of our game projects. </br>
+##### Player Point of View
+{{< video src="/videos/PlayerPov.mp4" autoplay="false" loop="true" width="800" height="450" >}}  
+
+##### World Point of View
+{{< video src="/videos/worldPov.mp4" autoplay="false" loop="true" width="800" height="450" >}}  
+
+
 
 
 #### Demo

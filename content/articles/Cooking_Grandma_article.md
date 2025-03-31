@@ -33,10 +33,10 @@ You play as a Chef who is running a diner in a busy part of town, the chef is se
 
 
 ##### Programmers: 
-William Arnberg  
-Gustaf Engsner  
-Emrik Åberg Wenthzel
+[William Arnberg](https://williamarnberg.com/)
+[Gustaf Engsner](https://gengsner.github.io/)  
+[Emrik Åberg Wenthzel](https://emriko.github.io/Portfolio/)
 
 ##### Procedural Artists:
-Carl Andersson  
-Hampus Helin
+[Carl Andersson](https://carlandersson.artstation.com/)  
+[Hampus Helin](https://hampushelin.artstation.com/)
