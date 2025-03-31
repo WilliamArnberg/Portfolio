@@ -123,9 +123,9 @@ Therefor the integer range we can encode each component to is $[0,511]$.
 Because the magnitude is 1 we can derive this from the fact that if the largest value a component can take is $v = 1$. The second largest is if two components have the same absolute value $\sqrt{v^2 + v^2} = \sqrt{2v^2}  = \sqrt{2\frac{1}{2}} = \sqrt{1} = 1$.  
 
 This is proof of the ```min``` and ```max``` range for the quantization to achieve as much precision as possible.
-The range the quantization will encode into is $[-\sqrt{\frac{1}{2}},\sqrt{\frac{1}{2}} ]$
-This results in a precision of 
-
+The range the quantization will encode into is $[-\sqrt{\frac{1}{2}},\sqrt{\frac{1}{2}} ]$  
+This results in a precision of approximately 
+ 
 This is useful because we may now have a larger precision since we are not encoding in $[-1,1]$.
 
 All that is left of the Compression step now is to shift the values into a ```uint32_t``` by bitmasking and left shifting.
@@ -150,10 +150,14 @@ Position and velocity is compressed by taking the difference from frame $A$ to f
 
 Maximum change must also be taken into account when considering the range that you may compress within.
 
-If you need to do teleportation or larger positional changes, reconsider the approach taken or add the ability to send full uncompressed position occasionally.
+If you need to do teleportation or larger positional changes, reconsider the approach taken or add the ability to send full uncompressed position occasionally.</br>
 
+Even with smaller positional changes clipping and other issues may start appearing, so a more sophisticated system that occasionally sends a full positional value may be required to adjust if the simulation have accumulated too much error.
 
-### Result
+{{< video src="/videos/drifting.mp4" autoplay="false" loop="true" width="800" height="450" >}}   </br>
+
+ 
+### Compression results
 Original: 64 bytes -> Quantized 20 bytes final reduction of (68.75%). </br>
 ![image](images/network/QuantizedState.png)
 
@@ -165,7 +169,7 @@ On the recieving end just keep the object at the last known place.
 
 
 
-# Test Case
+# Setting up client-server functionality 
 ### Messages, packets and buffers
 To be able to send messages across networks I needed to be able to serialize and deserialize data.
 For that we need a base message class.
@@ -202,12 +206,10 @@ Each frame before sending a packet the sequence buffer constructs the package ac
 
  If the packets have not been acked when constructing packages before sending, the sender will resend that package if the roundtrip-time have been crossed as that package is assumed to have been lost. 
  
-# Inserting and Applying state
 
-When state is recieved it is placed into a jitter buffer, and will be held for approximately 5 frames before applying the state to the simulation to avoid jitter.
-The amount of time to wait would ideally be a calculation made with respect to latency.
+# Final Result 
 
-{{< video src="/videos/net.mp4" autoplay="false" loop="true" width="800" height="450" >}}  
+{{< video src="/videos/compressedPhysics.mp4" autoplay="false" loop="true" width="800" height="450" >}}  
 
 
 

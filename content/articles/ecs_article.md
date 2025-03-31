@@ -186,10 +186,10 @@ The demo is currently running with an algorithmic complexity of O(n^2) where eac
 {{< wasm_game >}}
 
 
-#### Other Projects built using the ECS
+#### Projects built by other people using the ECS
 
-
-
+[Physics Engine implementation by Gustaf Engsner](https://gengsner.github.io/posts/physics_engine/)
+<!-- [AI Behavior Tree implementation by Anghello Escalera] -->
 
 ###### References
 <https://ajmmertens.medium.com/>  
