@@ -17,4 +17,3 @@ params:
 ---
 
 Archetype-based Entity-Component-System,with Queries, Filtered-Queries, Systems, staging and more.
-

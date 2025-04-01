@@ -31,7 +31,9 @@ The core design pillars I employed were:
 - speed
 
 ### Core Concepts
-A lot of the code have been stripped for display purposes, if you want the full project with more examples please visit my  [Git](https://github.com/WilliamArnberg/World).
+A lot of the code have been stripped for display purposes, if you want the full project with more examples please visit
+[My Github](https://github.com/WilliamArnberg/World) [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/1024px-Octicons-mark-github.svg.png" style="width: 4em;" />](https://github.com/WilliamArnberg/World)
+
 
 ##### Entity
 ```cpp
@@ -187,7 +189,7 @@ Here is an implementation of this I made in one of our game projects. </br>
 
 #### Demo
 Demo compiled using Emscripten and Raylib, running a simulation of Boids using a Data-oriented approach with the Entity-Component-System
-The demo is currently running with an algorithmic complexity of O(n^2) where each boid have is testing against every other boid in the simulation.  
+The demo is currently running with an algorithmic complexity of O(n^2) where each boid is testing against every other boid in the simulation.  
 
 {{< wasm_game >}}
 
