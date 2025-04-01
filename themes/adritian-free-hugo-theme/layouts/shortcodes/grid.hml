@@ -1,0 +1,53 @@
+<style>
+  .responsive-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .responsive-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+
+  .media-container {
+    width: 100%;
+    max-width: 560px; /* Keeps videos at full size */
+    aspect-ratio: 16 / 9; /* Ensures correct proportions */
+  }
+
+  /* Style only the video */
+  .media-container iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Style only the image */
+  .media-container img {
+    width: 50%; /* Scale image down */
+    height: auto;
+    object-fit: cover;
+    object-position: center; /* Centers the image */
+    display: block;
+    margin: 0 auto; /* Centers the image horizontally */
+  }
+</style>
+
+<div class="responsive-grid">
+  
+  <div class="media-container">
+    {{ if .Get "video" }}
+      {{ .Get "video" | safeHTML }}
+    {{ else }}
+      <img src="{{ .Get "image" }}" alt="Placeholder image">
+    {{ end }}
+  </div>
+
+  <div>
+    {{ .Inner | markdownify }}
+  </div>
+
+</div>

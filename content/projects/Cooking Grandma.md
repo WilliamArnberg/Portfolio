@@ -1,5 +1,5 @@
 ---
-date: '2024-08-26T09:53:42+02:00' # date in which the content is created - defaults to "today"
+date: '2024-07-26T09:53:42+02:00' # date in which the content is created - defaults to "today"
 title: 'Cooking Grandma'
 draft: false # set to "true" if you want to hide the content 
 link: "https://williamarnberg.com/articles/cooking_grandma_article/" # optional URL to link the logo to
