@@ -15,3 +15,4 @@ params:
         _2x: "images/ecs/demo.png"
     
 ---
+Group projects from my time at The Game Assembly.

@@ -89,7 +89,7 @@ You can download and play it on [Google Play](https://play.google.com/store/apps
 |---|---|
 | **Genre**   | Mobile puzzle game  |
 | **Engine**  | Unity |
-| **Team**  | 6 Programmers, 3 artists, 2 level designers, 2 procedural artists |
+| **Team**  | 6 Programmers, 4 artists, 3 level designers, 2 procedural artists |
 
 ### Contributions
 - Game Grid  
@@ -110,7 +110,8 @@ You can download and play it on [Google Play](https://play.google.com/store/apps
 | **Team**  | 6 Programmers, 3 artists, 2 level designers, 2 procedural artists |
 
 ### Contributions
-- Game Grid  
-- Puzzle Gameplay  
+- World curvature Shader
+- See-through wall shader
+
 
 {{< /grid >}}
