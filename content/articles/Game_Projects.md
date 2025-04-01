@@ -2,7 +2,7 @@
 date: '2025-02-26T09:53:42+02:00' # date in which the content is created - defaults to "today"
 title: 'Game Projects '
 draft: false # set to "true" if you want to hide the content 
-summary: "During our second year, I designed and implemented my own Archetype-based ECS in my own game engine."
+summary: "Group projects made at The Game Assembly"
 ---
 
 # AI Quit
