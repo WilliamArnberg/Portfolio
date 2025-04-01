@@ -1,6 +1,6 @@
 ---
 date: '2025-03-01T09:53:42+02:00' # date in which the content is created - defaults to "today"
-title: 'Data-Quantization and Networking (WIP)'
+title: 'Data-Quantization and Networking'
 draft: false # set to "true" if you want to hide the content 
 summary: "Networking a physics simulation with custom client & server and compression techniques"
     

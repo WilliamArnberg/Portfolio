@@ -6,7 +6,7 @@ summary: "Group projects made at The Game Assembly"
 ---
 
 # AI Quit
-{{< grid image="/images/wip.png" >}}
+{{< grid image="\images\wip.png" >}}
 
 |   |    |
 |---|---   |
