@@ -66,7 +66,7 @@ Animation Systems with interpolated animations, ability to keyframe functors and
 
 |   |    |
 |---|---   |
-| **Genre**   | Top-down action, puzzle game  |
+| **Genre**   | 2D platformer |
 | **Engine**  | The Game Engine (TGA School proprietary Engine)  |
 |  **Team**  | 6 Programmers, 3 artists, 3 level-designers, 3 procedural artists  |
 ### Contributions 

@@ -50,7 +50,8 @@
   translation: " "
 
 - id: "showcase_description"
-  translation: "I am a Game programmer specializing in Engine and Systems development, currently looking for an internship starting August 2025."
+  translation: "I am a Game programmer specializing in Engine and Systems development, currently looking for an internship starting August 2025. </br> 
+  “I am part of The Game Assembly’s internship program. As per the agreement between the Games Industry and The Game Assembly, neither student nor company may be in contact with one another regarding internships before April 23rd. Any internship offers can be made on May 5th, at the earliest.”"
 
 - id: "showcase_button"
   translation: "Contact"
@@ -71,7 +72,7 @@
 
       Before enrolling in The Game Assembly I was running a company (Krafton) together with my brother.<br/>
 
-      When the business failed in 2022 I decided to go after my childhood dream of becoming a game developer. <br/>
+      When the business failed in 2022 I decided to pursue my childhood dream of becoming a game developer. <br/>
       
       On my free time you will find me playing or DM'ing DnD, bouldering and sportsclimbing, or going on a coding adventure.
 
