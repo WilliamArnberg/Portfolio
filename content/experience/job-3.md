@@ -13,3 +13,12 @@ duration: "2017-2022"
 Planned and structured the implementation of selected products based on the project's specific framework and budget.
 Executed electrical projects from start to finish.  
 Created and managed schedules, communicated with clients and other stakeholders, managed budgets and resources, and ensured that the project met all technical requirements and regulations.
+
+Some projects I managed.
+
+#### Höghus 1 & 2, Kontor — Sergels Torg
+##### 1900 sqm office adaptation
+- Project management 
+- Programming of DALI router systems.
+
+![image](/images/otherProjects/sergel.jpg)

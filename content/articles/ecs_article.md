@@ -8,6 +8,7 @@ summary: "During my second year, I designed and implemented my own Archetype-bas
 At the beginning of our second year at ***The Game Assembly*** we get the opportunity to build our own game engines,
 and in the previous year I got a lot of experience working in a more pure object-oriented way using GameObject component systems
 riddled with virtual functions causing cache misses at every function call. 
+This ECS will have been used in a total of three games which you will be able to see [here](https://williamarnberg.com/articles/game_projects/).
 
 Having dug through the trenches and seen what problems could arise making games with a object oriented
 and inheritance based model I felt a major lacking of knowledge towards a the data oriented way of programming I had seen a lot of GDC / CPPCon talks about.  
@@ -197,7 +198,8 @@ The demo is currently running with an algorithmic complexity of O(n^2) where eac
 #### Projects built by other people using the ECS
 
 [Physics Engine implementation by Gustaf Engsner](https://gengsner.github.io/posts/physics_engine/)
-<!-- [AI Behavior Tree implementation by Anghello Escalera] -->
+[AI Behavior Tree implementation by Anghello Escalera](https://anghelloescalerairribarrin.com/#specialization)
+
 
 ###### References
 <https://ajmmertens.medium.com/>  
