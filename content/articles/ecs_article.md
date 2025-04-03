@@ -200,7 +200,7 @@ The demo is currently running with an algorithmic complexity of O(n^2) where eac
 
 #### Projects built by other people using the ECS
 
-[Physics Engine implementation by Gustaf Engsner](https://gengsner.github.io/posts/physics_engine/)
+[Physics Engine implementation by Gustaf Engsner](https://gengsner.github.io/posts/physics_engine/) </br>
 [AI Behavior Tree implementation by Anghello Escalera](https://anghelloescalerairribarrin.com/#specialization)
 
 
