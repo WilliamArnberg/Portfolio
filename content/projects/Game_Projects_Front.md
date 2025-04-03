@@ -11,8 +11,8 @@ params:
         btnText: "Read More"
         URL: "https://williamarnberg.com/articles/game_projects/"
     image:  
-        x: "images/ecs/demo.png"
-        _2x: "images/ecs/demo.png"
+        x: "/images/gameprojects.png"
+        _2x: "/images/gameprojects.png"
     
 ---
 Group projects from my time at The Game Assembly.

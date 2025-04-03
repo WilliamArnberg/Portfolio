@@ -6,7 +6,8 @@ summary: "Group projects made at The Game Assembly"
 ---
 
 # AI Quit
-{{< grid image="\images\wip.png" >}}
+Currently Work in progress!
+{{< grid image="/gifs/run_wip.gif" >}}
 
 |   |    |
 |---|---   |
@@ -23,8 +24,9 @@ Engine Development.
 </br>
 
 # Spite : The Infernal Oath
+Currently Work in progress!
 
-{{< grid image="/images/wip.png" >}}
+{{< grid image="/gifs/runcycle.gif" >}}
 
 
 |   |    |

@@ -5,6 +5,10 @@ draft: false # set to "true" if you want to hide the content
 summary: "During my second year, I designed and implemented my own Archetype-based ECS in my groups custom game engine made from scratch."
 ---
 
+A lot of the code have been stripped for display purposes, if you want the full project with more examples please visit
+[My Github](https://github.com/WilliamArnberg/World) <a href="https://github.com/WilliamArnberg/World" style="text-decoration: none">[<img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" style="width: 2em; height: 2em; vertical-align: middle; border: none !important;">](https://github.com/WilliamArnberg/World)</a>
+
+# Introduction   
 At the beginning of our second year at ***The Game Assembly*** we get the opportunity to build our own game engines,
 and in the previous year I got a lot of experience working in a more pure object-oriented way using GameObject component systems
 riddled with virtual functions causing cache misses at every function call. 
@@ -32,8 +36,7 @@ The core design pillars I employed were:
 - speed
 
 ### Core Concepts
-A lot of the code have been stripped for display purposes, if you want the full project with more examples please visit
-[My Github](https://github.com/WilliamArnberg/World) [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/1024px-Octicons-mark-github.svg.png" style="width: 4em;" />](https://github.com/WilliamArnberg/World)
+
 
 
 ##### Entity
