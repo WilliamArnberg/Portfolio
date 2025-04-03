@@ -1,6 +1,6 @@
 
 <video {{ with .Get "loop" }}loop{{ end }} {{ with .Get "width" }}width="{{ . }}"{{ end }} {{ with .Get "height" }}height="{{ . }}"{{ end }} controls>
-    <source src="{{ .Get "src" }}" type="video/mp4">
+    <source src="{{ .Get "src" }}#t=0.001" type="video/mp4">
     Your browser does not support the video tag.
 </video>
 
