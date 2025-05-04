@@ -6,9 +6,7 @@ summary: "Group projects made at The Game Assembly"
 ---
 
 # AI Quit
-Currently Work in progress!
-{{< grid image="/gifs/run_wip.gif" >}}
-
+git{{< grid video="<video controls playsinline style='width:100%'><source src='/videos/AI_QUIT_Trailer.mp4' type='video/mp4'></video>" >}}
 |   |    |
 |---|---   |
 | **Genre**   | First Person Shooter  |
