@@ -6,8 +6,7 @@ summary: "Group projects made at The Game Assembly"
 ---
 
 # AI Quit
-{{< grid image="\images\wip.png" >}}
-
+git{{< grid video="<video controls playsinline style='width:100%'><source src='/videos/AI_QUIT_Trailer.mp4' type='video/mp4'></video>" >}}
 |   |    |
 |---|---   |
 | **Genre**   | First Person Shooter  |
@@ -23,8 +22,9 @@ Engine Development.
 </br>
 
 # Spite : The Infernal Oath
+Currently Work in progress!
 
-{{< grid image="/images/wip.png" >}}
+{{< grid image="/gifs/runcycle.gif" >}}
 
 
 |   |    |
@@ -66,7 +66,7 @@ Animation Systems with interpolated animations, ability to keyframe functors and
 
 |   |    |
 |---|---   |
-| **Genre**   | Top-down action, puzzle game  |
+| **Genre**   | 2D platformer |
 | **Engine**  | The Game Engine (TGA School proprietary Engine)  |
 |  **Team**  | 6 Programmers, 3 artists, 3 level-designers, 3 procedural artists  |
 ### Contributions 
