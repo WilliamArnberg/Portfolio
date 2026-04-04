@@ -19,7 +19,7 @@
 
 ## Footer
 - id: "footer_notice"
-  translation: "I am part of The Game Assembly's internship program. As per the agreement between the Game Industry and The Game Assembly, <br/> neither student nor company may be in contact with one another regarding internships before April 23rd. <br/> Any internship offers can be made on May 6th, at the earliest."
+  translation: ""
 
 - id: "language"
   translation: "Language"
@@ -50,7 +50,7 @@
   translation: " "
 
 - id: "showcase_description"
-  translation: "I am a Game programmer specializing in Engine and Systems development, currently looking for an internship starting August 2025."
+  translation: "I am a Game Programmer specializing in Engine and Systems development, currently working at Axolot Games."
 
 - id: "showcase_button"
   translation: "Contact"
@@ -72,6 +72,8 @@
       Before enrolling in The Game Assembly I was running a company (Krafton) together with my brother.<br/>
 
       When the business failed in 2022 I decided to go after my childhood dream of becoming a game developer. <br/>
+
+      I completed a 7-month internship at Axolot Games as a Game Programmer, working on engine systems and gameplay features and have since continued on a contract with them. <br/>
       
       On my free time you will find me playing or DM'ing DnD, bouldering and sportsclimbing, or going on a coding adventure.
 
@@ -92,9 +94,7 @@
 
 - id: "experience_description"
   translation:  
-    "Over my professional life, I have constructed,
-     managed and designed apartments,offices, labs and schools.     
-     "
+    "From designing electrical systems to building game engines, my career has taken me from construction project management to game development."
    
 
 - id: "experience_button"
@@ -160,9 +160,6 @@
 
 - id: "contact_phone_title"
   translation: "Phone Number"
-
-- id: "contact_phone_number"
-  translation: "+46 72 447 14 41"
 
 - id: "contact_email_title"
   translation: "Email"
